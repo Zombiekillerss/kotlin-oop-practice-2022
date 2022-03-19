@@ -15,14 +15,11 @@ fun parseAddresses(addresses: String) : MutableList<Address> {
         if(isFullStop && addresses[i]=='.') {
             isFullStop = false
             i++
-            while(addresses[i] == ' ') {
-                i++
-            }
             continue
         }
         else if(!isFullStop && addresses[i] == separator) {
             isFullStop = true
-            i += 1
+            i ++
             continue
         }
         else if(isFullStop){
