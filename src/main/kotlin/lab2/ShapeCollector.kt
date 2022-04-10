@@ -17,7 +17,7 @@ class Figure(
                     && fillColor.transparency in 0..100 && borderColor.transparency in 0..100)
         )
             error(
-                "wrong color values"
+                "Wrong color values"
             )
         s = if (s == 0.0) {
             if (lengthFirstSide > 0.0 && lengthSecondSide > 0.0 && lengthThirdSide > 0.0) {
@@ -29,12 +29,12 @@ class Figure(
                     sqrt(
                         perimeter * (perimeter - lengthFirstSide) * (perimeter - lengthSecondSide) * (perimeter - lengthThirdSide)
                     )
-                } else error(("lol"))
+                } else error(("Invalid triangle sides"))
             } else if (lengthFirstSide > 0.0 && lengthSecondSide > 0.0)
                 lengthFirstSide * lengthSecondSide
             else if (lengthFirstSide > 0.0)
                 PI * lengthFirstSide.pow(2.0)
-            else error("wrong")
+            else error("All side values are 0 or some sides are less than 0")
         } else s
         return s
     }
@@ -65,19 +65,19 @@ class ShapeCollector {
 
     fun getFigureSmallest(): Figure {
         if (minS == null)
-            error("lol")
+            error("You have not added a figure!")
         return minS as Figure
     }
 
     fun getFigureLargest(): Figure {
         if (maxS == null)
-            error("lol")
+            error("You have not added a figure!")
         return maxS as Figure
     }
 
     fun getSumArea(): Double {
         if (sum == 0.0)
-            error("lol")
+            error("You have not added a figure!")
         return sum
     }
 
@@ -86,7 +86,7 @@ class ShapeCollector {
     }
 
     fun findFillColor(fillColor: Color): List<Figure> {
-        return listFigure.filter { it.borderColor == fillColor } as MutableList<Figure>
+        return listFigure.filter { it.fillColor == fillColor } as MutableList<Figure>
     }
 
     fun getListFigure(): List<Figure> {
@@ -102,7 +102,7 @@ class ShapeCollector {
     }
 
     fun getFillFigure(fillColor: Color): Map<Color, List<Figure>> {
-        return mapOf(fillColor to (listFigure.filter { it.borderColor == fillColor }))
+        return mapOf(fillColor to (listFigure.filter { it.fillColor == fillColor }))
     }
 
     fun getListDifferentFigure(): List<List<Figure>> {
