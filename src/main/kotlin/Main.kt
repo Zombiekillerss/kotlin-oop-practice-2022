@@ -3,10 +3,11 @@ package lab1
 fun main() {
     val str = """
             1. 123, Название города 1, ул. Название улицы, д. Номер дома
-            2. 124, Название города 2, ул. Название улицы1, д. Номер дома
+                 2. 124, Название города 2, ул. Название улицы1    , д. Номер дома1        
+            3. 124, Название города 3, ул. Название улицы22, д. Номер дома2           
     """
     val addressList: List<Address> = parseAddresses(str)
-    println("2. ${addressList[1].postcode}, ${addressList[1].city}, ул. ${addressList[1].street}, д. ${addressList[1].houseNumber}")
+    println("2. ${addressList[2].postcode}, ${addressList[1].city}, ул. ${addressList[1].street}, д. ${addressList[2].houseNumber}.")
     var maxPostcode = addressList[0]
     var minPostcode = addressList[0]
     var longNameStreet = addressList[0]
