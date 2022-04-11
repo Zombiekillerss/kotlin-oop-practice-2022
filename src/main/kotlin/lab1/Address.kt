@@ -2,51 +2,36 @@ package lab1
 
 class Address(val postcode: String, val city: String, val street: String, val houseNumber: String)
 
-fun parseAddresses(addresses: String) : MutableList<Address> {
-    val addressList:MutableList<Address> = mutableListOf()
+fun parseAddresses(addresses: String): List<Address> {
+    val addressList: MutableList<Address> = mutableListOf()
     var postcode: String
     var city: String
     var street: String
     var houseNumber: String
-    var isFullStop = true
-    var i = 0
     val separator = '\n'
-    while(i != addresses.length) {
-        if(isFullStop && addresses[i]=='.') {
-            isFullStop = false
-            i++
+    val stringList = addresses.trimIndent().split(separator)
+    for (i in stringList) {
+        if (i == "")
             continue
-        }
-        else if(!isFullStop && addresses[i] == separator) {
-            isFullStop = true
-            i ++
-            continue
-        }
-        else if(isFullStop){
-            i++
-            continue
-        }
-        postcode = addresses.substring(i,addresses.indexOf(',', i))
-        i += postcode.length + 1
+        // i = *. ... , ... , ... , ...
+        //postcode = *. (...) ,   ,   ,
+        postcode = i.substring(i.indexOf('.') + 1, i.indexOf(','))
         postcode = postcode.trimIndent()
-
-        city = addresses.substring(i,addresses.indexOf(',', i))
-        i += city.length + 1
+        //city = *.   , (...) ,   ,
+        city = i.substring(i.indexOf(',') + 1, i.indexOf(',', i.indexOf(',') + 1))
         city = city.trimIndent()
-
-        street = addresses.substring(i,addresses.indexOf(',', i))
-        i += street.length + 1
+        //street = *.   ,   , (...) ,
+        // i.substring(i.indexOf(',', i.indexOf(',') + 1)) = *.   ,   (,   , )
+        // i.substring(i.indexOf(',', i.indexOf(',') + 1))
+        //            .substring(1, i.substring(i.indexOf(',', i.indexOf(',') + 1) + 1).indexOf(',')) = *.   ,   ,(   ),
+        street = i.substring(i.indexOf(',', i.indexOf(',') + 1))
+            .substring(1, i.substring(i.indexOf(',', i.indexOf(',') + 1) + 1).indexOf(','))
         street = street.substring(street.indexOf('.') + 1).trimIndent()
-
-        houseNumber = if(addresses.indexOf(separator,i) != -1)
-            addresses.substring(i,addresses.indexOf(separator,i))
-        else
-            addresses.substring(i)
-        i += houseNumber.length
-
+        //houseNumber = *.   ,   ,   , (...)
+        houseNumber = i.substring(i.lastIndexOf(',') + 1)
         houseNumber = houseNumber.substring(houseNumber.indexOf('.') + 1).trimIndent()
 
-        addressList.add(Address(postcode,city,street,houseNumber))
+        addressList.add(Address(postcode, city, street, houseNumber))
     }
     return addressList
 }
