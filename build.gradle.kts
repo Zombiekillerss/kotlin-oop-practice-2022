@@ -5,7 +5,7 @@ plugins {
     application
 }
 
-group = "ru.eltech.sapr"
+group = "ru.el tech.spr"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -15,7 +15,6 @@ repositories {
 dependencies {
     testImplementation(kotlin("test"))
 }
-
 tasks.test {
     useJUnitPlatform()
 }
