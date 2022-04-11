@@ -11,8 +11,6 @@ fun parseAddresses(addresses: String): List<Address> {
     val separator = '\n'
     val stringList = addresses.trimIndent().split(separator)
     for (i in stringList) {
-        if (i == "")
-            continue
         // i = *. ... , ... , ... , ...
         //postcode = *. (...) ,   ,   ,
         postcode = i.substring(i.indexOf('.') + 1, i.indexOf(','))
