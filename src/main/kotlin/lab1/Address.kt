@@ -14,20 +14,20 @@ fun parseAddresses(addresses: String): List<Address> {
         // i = *. ... , ... , ... , ...
         //postcode = *. (...) ,   ,   ,
         postcode = i.substring(i.indexOf('.') + 1, i.indexOf(','))
-        postcode = postcode.trimIndent()
+        postcode = postcode.trimIndent().trim()
         //city = *.   , (...) ,   ,
         city = i.substring(i.indexOf(',') + 1, i.indexOf(',', i.indexOf(',') + 1))
-        city = city.trimIndent()
+        city = city.trimIndent().trim()
         //street = *.   ,   , (...) ,
         // i.substring(i.indexOf(',', i.indexOf(',') + 1)) = *.   ,   (,   , )
         // i.substring(i.indexOf(',', i.indexOf(',') + 1))
         //            .substring(1, i.substring(i.indexOf(',', i.indexOf(',') + 1) + 1).indexOf(',')) = *.   ,   ,(   ),
         street = i.substring(i.indexOf(',', i.indexOf(',') + 1))
             .substring(1, i.substring(i.indexOf(',', i.indexOf(',') + 1) + 1).indexOf(','))
-        street = street.substring(street.indexOf('.') + 1).trimIndent()
+        street = street.substring(street.indexOf('.') + 1).trimIndent().trim()
         //houseNumber = *.   ,   ,   , (...)
         houseNumber = i.substring(i.lastIndexOf(',') + 1)
-        houseNumber = houseNumber.substring(houseNumber.indexOf('.') + 1).trimIndent()
+        houseNumber = houseNumber.substring(houseNumber.indexOf('.') + 1).trimIndent().trim()
 
         addressList.add(Address(postcode, city, street, houseNumber))
     }
