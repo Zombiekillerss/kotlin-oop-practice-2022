@@ -9,27 +9,28 @@ fun parseAddresses(addresses: String): List<Address> {
     var street: String
     var houseNumber: String
     val separator = '\n'
-    val stringList = addresses.trimIndent().split(separator)
+    val stringList = addresses.trimIndent().trim().split(separator)
     for (i in stringList) {
-        // i = *. ... , ... , ... , ...
-        //postcode = *. (...) ,   ,   ,
-        postcode = i.substring(i.indexOf('.') + 1, i.indexOf(','))
-        postcode = postcode.trimIndent().trim()
-        //city = *.   , (...) ,   ,
-        city = i.substring(i.indexOf(',') + 1, i.indexOf(',', i.indexOf(',') + 1))
-        city = city.trimIndent().trim()
-        //street = *.   ,   , (...) ,
-        // i.substring(i.indexOf(',', i.indexOf(',') + 1)) = *.   ,   (,   , )
-        // i.substring(i.indexOf(',', i.indexOf(',') + 1))
-        //            .substring(1, i.substring(i.indexOf(',', i.indexOf(',') + 1) + 1).indexOf(',')) = *.   ,   ,(   ),
-        street = i.substring(i.indexOf(',', i.indexOf(',') + 1))
-            .substring(1, i.substring(i.indexOf(',', i.indexOf(',') + 1) + 1).indexOf(','))
-        street = street.substring(street.indexOf('.') + 1).trimIndent().trim()
-        //houseNumber = *.   ,   ,   , (...)
-        houseNumber = i.substring(i.lastIndexOf(',') + 1)
-        houseNumber = houseNumber.substring(houseNumber.indexOf('.') + 1).trimIndent().trim()
+        if(i.trim() != "") {
+            // i = *. ... , ... , ... , ...
+            // postcode = *. (...) ,   ,   ,
+            postcode = i.substring(i.indexOf('.') + 1, i.indexOf(','))
+            postcode = postcode.trimIndent().trim()
+            // city = *.   , (...) ,   ,
+            city = i.substring(i.indexOf(',') + 1, i.indexOf(',', i.indexOf(',') + 1))
+            city = city.trimIndent().trim()
+            // street = *.   ,   , (...) ,
+            // i.substring(i.indexOf(',', i.indexOf(',') + 1)) = *.   ,   ,(   , )
+            street = i.substring(i.indexOf(',', i.indexOf(',') + 1) + 1)
+            // street.substring(0, street.indexOf(',')) = *.   ,   ,(   ),
+            street = street.substring(0, street.indexOf(','))
+            street = street.substring(street.indexOf('.') + 1).trimIndent().trim()
+            //houseNumber = *.   ,   ,   , (...)
+            houseNumber = i.substring(i.lastIndexOf(',') + 1)
+            houseNumber = houseNumber.substring(houseNumber.indexOf('.') + 1).trimIndent().trim()
 
-        addressList.add(Address(postcode, city, street, houseNumber))
+            addressList.add(Address(postcode, city, street, houseNumber))
+        }
     }
     return addressList
 }
