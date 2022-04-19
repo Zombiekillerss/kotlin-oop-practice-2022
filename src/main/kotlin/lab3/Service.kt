@@ -58,48 +58,54 @@ class Service : ContactsService {
     }
 
     override fun getPersonContacts(person: Person): List<Contact> {
-        if(listPersons.containsKey(person))
+        if (listPersons.containsKey(person))
             return listPersons[person]?.toList() ?: error("lol")
         else error("lol")
     }
 
     override fun getPersonPhones(person: Person): List<Phone> {
-        if(listPersons.containsKey(person))
-            return listPersons[person]?.filterIsInstance<Phone>()?.toList()?: error("lol")
+        if (listPersons.containsKey(person))
+            return listPersons[person]?.filterIsInstance<Phone>()?.toList() ?: error("lol")
         else error("lol")
     }
 
     override fun getPersonEmails(person: Person): List<Email> {
-        if(listPersons.containsKey(person))
-            return listPersons[person]?.filterIsInstance<Email>()?.toList()?: error("lol")
+        if (listPersons.containsKey(person))
+            return listPersons[person]?.filterIsInstance<Email>()?.toList() ?: error("lol")
         else error("lol")
     }
 
     override fun getPersonLinks(person: Person): List<LinkProfile> {
-        if(listPersons.containsKey(person))
-            return listPersons[person]?.filterIsInstance<LinkProfile>()?.toList()?: error("lol")
+        if (listPersons.containsKey(person))
+            return listPersons[person]?.filterIsInstance<LinkProfile>()?.toList() ?: error("lol")
         else error("lol")
     }
 
     override fun getPersonAddress(person: Person): List<Address> {
-        if(listPersons.containsKey(person))
-            return listPersons[person]?.filterIsInstance<Address>()?.toList()?: error("lol")
+        if (listPersons.containsKey(person))
+            return listPersons[person]?.filterIsInstance<Address>()?.toList() ?: error("lol")
         else error("lol")
     }
 
     override fun getAllPersons(): List<Person> {
-        if(listPersons.isNotEmpty())
+        if (listPersons.isNotEmpty())
             return listPersons.keys.toList()
         else error("lol")
     }
 
     override fun getAllContacts(): Map<Person, List<Contact>> {
-        if(listPersons.isNotEmpty())
+        if (listPersons.isNotEmpty())
             return listPersons
         else error("lol")
     }
 
     override fun findPersons(subFirstName: String, subLastName: String): List<Person> {
-        TODO("Not yet implemented")
+        if (listPersons.isNotEmpty())
+            return listPersons.filter {
+                it.key.firstName.indexOf(subFirstName) == 0 && it.key.firstName.indexOf(
+                    subLastName
+                ) == 0
+            }.keys.toList()
+        else error("lol")
     }
 }
