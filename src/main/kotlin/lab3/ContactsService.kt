@@ -6,9 +6,9 @@ interface ContactsService {
     fun removePerson(person: Person)
 
     fun addPhone(person: Person, phone: String, phoneType: PhoneType)
-    fun addEmail(person: Person, phone: String, phoneType: PhoneType)
-    fun addLink(person: Person, phone: String, phoneType: PhoneType)
-    fun addAddress(person: Person, phone: String, phoneType: PhoneType)
+    fun addEmail(email: String)
+    fun addLink(socialNetworkName: String, url: String)
+    fun addAddress(postcode: String, city: String, street: String, houseNumber: String)
 
     fun getPersonContacts(person: Person): List<Contact>
     fun getPersonPhones(person: Person): List<Phone>
