@@ -69,15 +69,17 @@ class Service : ContactsService {
         else error("lol")
     }
 
-    override fun getPersonEmails(person: Person): List<Phone> {
+    override fun getPersonEmails(person: Person): List<Email> {
+        if(listPersons.containsKey(person))
+            return listPersons[person]?.filterIsInstance<Email>()?.toList()?: error("lol")
+        else error("lol")
+    }
+
+    override fun getPersonLinks(person: Person): List<LinkProfile> {
         TODO("Not yet implemented")
     }
 
-    override fun getPersonLinks(person: Person): List<Phone> {
-        TODO("Not yet implemented")
-    }
-
-    override fun getPersonAddress(person: Person): List<Phone> {
+    override fun getPersonAddress(person: Person): List<Address> {
         TODO("Not yet implemented")
     }
 
