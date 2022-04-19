@@ -88,11 +88,15 @@ class Service : ContactsService {
     }
 
     override fun getAllPersons(): List<Person> {
-        TODO("Not yet implemented")
+        if(listPersons.isNotEmpty())
+            return listPersons.keys.toList()
+        else error("lol")
     }
 
     override fun getAllContacts(): Map<Person, List<Contact>> {
-        TODO("Not yet implemented")
+        if(listPersons.isNotEmpty())
+            return listPersons
+        else error("lol")
     }
 
     override fun findPersons(subFirstName: String, subLastName: String): List<Person> {
