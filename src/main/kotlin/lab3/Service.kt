@@ -76,7 +76,9 @@ class Service : ContactsService {
     }
 
     override fun getPersonLinks(person: Person): List<LinkProfile> {
-        TODO("Not yet implemented")
+        if(listPersons.containsKey(person))
+            return listPersons[person]?.filterIsInstance<LinkProfile>()?.toList()?: error("lol")
+        else error("lol")
     }
 
     override fun getPersonAddress(person: Person): List<Address> {
