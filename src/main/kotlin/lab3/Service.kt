@@ -102,7 +102,7 @@ class Service : ContactsService {
     override fun findPersons(subFirstName: String, subLastName: String): List<Person> {
         if (listPersons.isNotEmpty())
             return listPersons.filter {
-                it.key.firstName.indexOf(subFirstName) == 0 && it.key.firstName.indexOf(
+                it.key.firstName.indexOf(subFirstName) == 0 && it.key.lastName.indexOf(
                     subLastName
                 ) == 0
             }.keys.toList()
