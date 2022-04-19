@@ -50,7 +50,7 @@ class Service : ContactsService {
     }
 
     override fun addLink(person: Person, socialNetworkName: String, url: String) {
-        TODO("Not yet implemented")
+        addContact(person, LinkProfile(socialNetworkName, url))
     }
 
     override fun addAddress(person: Person, postcode: String, city: String, street: String, houseNumber: String) {
