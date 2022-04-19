@@ -45,15 +45,15 @@ class Service : ContactsService {
         addContact(person, Phone(phone, phoneType))
     }
 
-    override fun addEmail(person: Person, phone: String, phoneType: PhoneType) {
+    override fun addEmail(email: String) {
         TODO("Not yet implemented")
     }
 
-    override fun addLink(person: Person, phone: String, phoneType: PhoneType) {
+    override fun addLink(socialNetworkName: String, url: String) {
         TODO("Not yet implemented")
     }
 
-    override fun addAddress(person: Person, phone: String, phoneType: PhoneType) {
+    override fun addAddress(postcode: String, city: String, street: String, houseNumber: String) {
         TODO("Not yet implemented")
     }
 
