@@ -9,7 +9,7 @@ sealed class Contact()
 
 data class Phone(val number: String, val type: PhoneType) : Contact()
 
-data class Email(val email: String)
+data class Email(val email: String) : Contact()
 
 data class LinkProfile(val name: String, val url: String) : Contact()
 
@@ -45,15 +45,15 @@ class Service : ContactsService {
         addContact(person, Phone(phone, phoneType))
     }
 
-    override fun addEmail(email: String) {
+    override fun addEmail(person: Person, email: String) {
+        addContact(person, Email(email))
+    }
+
+    override fun addLink(person: Person, socialNetworkName: String, url: String) {
         TODO("Not yet implemented")
     }
 
-    override fun addLink(socialNetworkName: String, url: String) {
-        TODO("Not yet implemented")
-    }
-
-    override fun addAddress(postcode: String, city: String, street: String, houseNumber: String) {
+    override fun addAddress(person: Person, postcode: String, city: String, street: String, houseNumber: String) {
         TODO("Not yet implemented")
     }
 
