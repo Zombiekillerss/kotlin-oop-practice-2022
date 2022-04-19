@@ -1,16 +1,19 @@
-package lab1.lab3
+package lab3
 
 class Person(
-    private val name: String,
-    private val lastName: String,
-    internal var listContact: List<Contact> = mutableListOf()
+    val firstName: String,
+    val lastName: String
 )
 
-class Contact(val email: String, val phoneNumber: Phone, val link: LinkProfile, val address: Address) {
-    data class Phone(val number: Int, val type: PhoneType)
-    data class LinkProfile(val name: String, val url: String)
-    data class Address(val postcode: String, val city: String, val street: String, val houseNumber: String)
-}
+sealed class Contact()
+
+data class Phone(val number: String, val type: PhoneType) : Contact()
+
+data class Email(val email: String)
+
+data class LinkProfile(val name: String, val url: String) : Contact()
+
+data class Address(val postcode: String, val city: String, val street: String, val houseNumber: String) : Contact()
 
 enum class PhoneType {
     MOBILE,
@@ -19,20 +22,38 @@ enum class PhoneType {
 }
 
 class Service : ContactsService {
-    override fun addContact(person: Person, contact: Contact){
-        val newListContact = person.listContact
-        person.listContact = listOf(contact) + newListContact
+    private val listPersons = mutableMapOf<Person, MutableList<Contact>>()
+
+    override fun addContact(person: Person, contact: Contact) {
+        if (!listPersons.containsKey(person))
+            listPersons[person] = mutableListOf(contact)
+        else listPersons[person]?.add(contact)
     }
 
     override fun removeContact(person: Person, contact: Contact) {
-        TODO("Not yet implemented")
+        if (listPersons[person]?.remove(contact) == null)
+            error("lol")
     }
 
     override fun removePerson(person: Person) {
-        TODO("Not yet implemented")
+        if (listPersons.containsKey(person))
+            listPersons.remove(person)
+        else error("lol")
     }
 
     override fun addPhone(person: Person, phone: String, phoneType: PhoneType) {
+        addContact(person, Phone(phone, phoneType))
+    }
+
+    override fun addEmail(person: Person, phone: String, phoneType: PhoneType) {
+        TODO("Not yet implemented")
+    }
+
+    override fun addLink(person: Person, phone: String, phoneType: PhoneType) {
+        TODO("Not yet implemented")
+    }
+
+    override fun addAddress(person: Person, phone: String, phoneType: PhoneType) {
         TODO("Not yet implemented")
     }
 
@@ -40,7 +61,19 @@ class Service : ContactsService {
         TODO("Not yet implemented")
     }
 
-    override fun getPersonPhones(person: Person): List<Contact.Phone> {
+    override fun getPersonPhones(person: Person): List<Phone> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPersonEmails(person: Person): List<Phone> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPersonLinks(person: Person): List<Phone> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPersonAddress(person: Person): List<Phone> {
         TODO("Not yet implemented")
     }
 
@@ -49,6 +82,10 @@ class Service : ContactsService {
     }
 
     override fun getAllContacts(): Map<Person, List<Contact>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun findPersons(subFirstName: String, subLastName: String): List<Person> {
         TODO("Not yet implemented")
     }
 }
