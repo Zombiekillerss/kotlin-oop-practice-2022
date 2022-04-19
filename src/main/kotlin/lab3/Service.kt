@@ -5,7 +5,7 @@ class Person(
     val lastName: String
 )
 
-sealed class Contact()
+sealed class Contact
 
 data class Phone(val number: String, val type: PhoneType) : Contact()
 
@@ -54,7 +54,7 @@ class Service : ContactsService {
     }
 
     override fun addAddress(person: Person, postcode: String, city: String, street: String, houseNumber: String) {
-        TODO("Not yet implemented")
+        addContact(person, Address(postcode, city, street, houseNumber))
     }
 
     override fun getPersonContacts(person: Person): List<Contact> {
