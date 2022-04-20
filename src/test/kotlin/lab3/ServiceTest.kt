@@ -378,7 +378,7 @@ internal class ServiceTest {
             service.addContact(person, Phone("90",PhoneType.MOBILE))
             person = Person("Fest1", "Alexandr1")
             service.addContact(person, Phone("90",PhoneType.MOBILE))
-            val listPerson = listOf<Person>(
+            val listPerson = listOf(
                 Person("Test", "Alexandr"),
                 Person("Test1", "Alexandr1")
             )
