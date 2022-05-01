@@ -51,10 +51,6 @@ class Model {
         listeners.add(listener)
     }
 
-    /*fun removeModelChangeListener(listener: ModelChangeListener) {
-        listeners.remove(listener)
-    }*/
-
     fun doMove(statePlayer: State) {
         var newR = row
         var newC = col
