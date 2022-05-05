@@ -158,16 +158,16 @@ internal class ShapeCollectorTest {
 
     @Test
     fun getSumAreaTest() {
-        val figure1 = Circle(10.8,Color(),Color())
-        val figure2 = Circle(9.0,Color(),Color())
+        val figure1 = Circle(10.8, Color(), Color())
+        val figure2 = Circle(9.0, Color(), Color())
         val expected = figure1.calcArea() + figure2.calcArea()
         val collector = ShapeCollector()
-        try{
+        try {
             collector.getSumArea()
             assert(false)
-        }catch(e: Exception){
+        } catch (e: Exception) {
             val exception = "You have not added a figure!"
-            assertEquals(exception, e.message )
+            assertEquals(exception, e.message)
         }
         collector.addFigure(figure1)
         collector.addFigure(figure2)
@@ -176,28 +176,35 @@ internal class ShapeCollectorTest {
 
     @Test
     fun findBorderColorTest() {
-        val figure1 = Circle(10.8,Color(1,2),Color())
-        val figure2 = Circle(9.0,Color(),Color())
+        val figure1 = Circle(10.8, Color(1, 2), Color())
+        val figure2 = Circle(9.0, Color(), Color())
         val expected = listOf<Figure>(figure1)
         val collector = ShapeCollector()
         collector.addFigure(figure1)
         collector.addFigure(figure2)
-        assertEquals(expected, collector.findBorderColor(Color(1,2)))
+        assertEquals(expected, collector.findBorderColor(Color(1, 2)))
     }
 
     @Test
     fun findFillColorTest() {
-        val figure1 = Circle(10.8,Color(),Color(1,2))
-        val figure2 = Circle(9.0,Color(),Color())
+        val figure1 = Circle(10.8, Color(), Color(1, 2))
+        val figure2 = Circle(9.0, Color(), Color())
         val expected = listOf<Figure>(figure1)
         val collector = ShapeCollector()
         collector.addFigure(figure1)
         collector.addFigure(figure2)
-        assertEquals(expected, collector.findFillColor(Color(1,2)))
+        assertEquals(expected, collector.findFillColor(Color(1, 2)))
     }
 
     @Test
-    fun getBorderFigure() {
+    fun getBorderFigureTest() {
+        val figure1 = Circle(10.8, Color(1, 2), Color())
+        val figure2 = Circle(9.0, Color(), Color())
+        val expected = mutableMapOf(Color(1,2) to listOf<Figure>(figure1))
+        val collector = ShapeCollector()
+        collector.addFigure(figure1)
+        collector.addFigure(figure2)
+        assertEquals(expected, collector.getBorderFigure(Color(1, 2)))
     }
 
     @Test
