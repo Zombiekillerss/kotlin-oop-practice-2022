@@ -136,6 +136,24 @@ internal class ShapeCollectorTest {
 
     @Test
     fun getFigureLargest() {
+        @Test
+        fun getFigureLargestNull() {
+            val collector = ShapeCollector()
+            val expected = null
+            assertEquals(expected, collector.getFigureLargest())
+        }
+
+        @Test
+        fun getFigureLargest() {
+            val collector = ShapeCollector()
+            collector.addFigure(Circle(9.0, Color(), Color()))
+            collector.addFigure(Circle(10.0, Color(), Color()))
+            val expected = Circle(10.0, Color(), Color())
+            assertEquals(expected, collector.getFigureLargest())
+        }
+
+        getFigureLargest()
+        getFigureLargestNull()
     }
 
     @Test
