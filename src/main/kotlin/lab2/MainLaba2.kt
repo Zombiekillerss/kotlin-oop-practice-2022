@@ -1,14 +1,14 @@
-package lab1.lab2
+package lab2
 
 fun printList(listListFigures: List<List<Figure>>) {
     if (listListFigures.isNotEmpty()) {
         for (i in listListFigures) {
             for (j in i) {
                 when (i) {
-                    listListFigures[0] -> print("Circle with radius ${j.lengthFirstSide}")
-                    listListFigures[1] -> print("Square with sides ${j.lengthFirstSide}, ${j.lengthSecondSide}")
-                    listListFigures[2] -> print("Rectangle with sides ${j.lengthFirstSide}, ${j.lengthSecondSide}")
-                    listListFigures[3] -> print("Triangle with sides ${j.lengthFirstSide}, ${j.lengthSecondSide}, ${j.lengthThirdSide}")
+                    listListFigures[0] -> print(j)
+                    listListFigures[1] -> print(j)
+                    listListFigures[2] -> print(j)
+                    listListFigures[3] -> print(j)
                 }
             }
             if (i.isNotEmpty()) println("")
@@ -18,28 +18,22 @@ fun printList(listListFigures: List<List<Figure>>) {
 
 fun printListFigures(listFigures: List<Figure>) {
     for (i in listFigures) {
-        println("Sides of the figure ${i.lengthFirstSide}, ${i.lengthSecondSide}, ${i.lengthThirdSide}")
+        println(i)
     }
 }
 
 fun main() {
     val figures = ShapeCollector()
-    figures.addFigure(Figure(Color(2, 2, 2), Color(3, 3), 2.0))
+    figures.addFigure(Circle(2.0, Color(2, 2, 2), Color(3, 3)))
     var listListFigures = figures.getListDifferentFigure()
     printList(listListFigures)
-    figures.addFigure(Figure(Color(2, 2, 2), Color(3), 2.0, 2.0))
-    figures.addFigure(Figure(Color(2, 2, 2), Color(3, 3), 2.0, 3.0))
-    figures.addFigure(Figure(Color(2, 0, 2), Color(3), 2.0, 3.0, 2.0))
+    figures.addFigure(Square(2.0, Color(2, 2, 2), Color(3)))
+    figures.addFigure(Rectangle(2.0, 3.0,Color(2, 2, 2), Color(3, 3)))
+    figures.addFigure(Triangle(2.0, 3.0, 2.0, Color(2, 0, 2), Color(3)))
     listListFigures = figures.getListDifferentFigure()
     printList(listListFigures)
-    println(
-        "Sides of the figure with the smallest area ${figures.getFigureSmallest().lengthFirstSide}, " +
-                "${figures.getFigureSmallest().lengthSecondSide}, ${figures.getFigureSmallest().lengthThirdSide},"
-    )
-    println(
-        "Sides of the figure with the largest area ${figures.getFigureLargest().lengthFirstSide}, " +
-                "${figures.getFigureLargest().lengthSecondSide}, ${figures.getFigureLargest().lengthThirdSide}"
-    )
+    println(figures.getFigureSmallest())
+    println(figures.getFigureLargest())
     println("Sum of all areas ${figures.getSumArea()}")
     printListFigures(figures.findBorderColor(Color(2, 2, 0)))
     printListFigures(figures.findBorderColor(Color(2, 2, 2)))
