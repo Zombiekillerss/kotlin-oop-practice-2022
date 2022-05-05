@@ -100,6 +100,8 @@ internal class ShapeCollectorTest {
             val collector = ShapeCollector()
             collector.addFigure(Circle(8.0, Color(),Color()))
             collector.addFigure(Circle(10.0, Color(),Color()))
+            val list = listOf<Figure>(Circle(8.0, Color(),Color()),Circle(10.0, Color(),Color()))
+            assertEquals(list, collector.getListFigure())
         }
 
         addFigures()
