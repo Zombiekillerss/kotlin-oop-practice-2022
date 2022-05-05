@@ -30,7 +30,6 @@ class Circle(private val radius: Double, override val borderColor: Color, overri
         if (radius != other.radius) return false
         if (borderColor != other.borderColor) return false
         if (fillColor != other.fillColor) return false
-        if (s != other.s) return false
 
         return true
     }

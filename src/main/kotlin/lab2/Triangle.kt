@@ -45,7 +45,6 @@ class Triangle(
         if (lengthThirdSide != other.lengthThirdSide) return false
         if (borderColor != other.borderColor) return false
         if (fillColor != other.fillColor) return false
-        if (s != other.s) return false
 
         return true
     }

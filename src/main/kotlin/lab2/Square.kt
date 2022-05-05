@@ -29,7 +29,6 @@ class Square(private val lengthSide: Double, override val borderColor: Color, ov
         if (lengthSide != other.lengthSide) return false
         if (borderColor != other.borderColor) return false
         if (fillColor != other.fillColor) return false
-        if (s != other.s) return false
 
         return true
     }
