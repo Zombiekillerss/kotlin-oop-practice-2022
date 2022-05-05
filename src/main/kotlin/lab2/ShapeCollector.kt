@@ -19,12 +19,12 @@ class ShapeCollector {
         listFigure.add(newFigure)
     }
 
-    fun getFigureSmallest(): Figure {
-        return minS as Figure
+    fun getFigureSmallest(): Figure? {
+        return minS
     }
 
-    fun getFigureLargest(): Figure {
-        return maxS as Figure
+    fun getFigureLargest(): Figure? {
+        return maxS
     }
 
     fun getSumArea(): Double {
