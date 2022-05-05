@@ -20,4 +20,26 @@ class Circle(private val radius: Double, override val borderColor: Color, overri
     override fun toString(): String {
         return "Circle(radius = $radius)"
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Circle
+
+        if (radius != other.radius) return false
+        if (borderColor != other.borderColor) return false
+        if (fillColor != other.fillColor) return false
+        if (s != other.s) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = radius.hashCode()
+        result = 31 * result + borderColor.hashCode()
+        result = 31 * result + fillColor.hashCode()
+        result = 31 * result + s.hashCode()
+        return result
+    }
 }
