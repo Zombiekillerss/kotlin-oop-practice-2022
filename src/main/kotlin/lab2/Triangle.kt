@@ -11,12 +11,12 @@ class Triangle(
 ) :
     Figure {
     init {
-        require(lengthFirstSide > 0.0 && lengthSecondSide > 0.0 && lengthThirdSide > 0.0) { ";kj" }
+        require(lengthFirstSide > 0.0 && lengthSecondSide > 0.0 && lengthThirdSide > 0.0) { "Side lengths entered incorrectly!!" }
         require(
             lengthFirstSide + lengthSecondSide > lengthThirdSide
                     && lengthFirstSide + lengthThirdSide > lengthSecondSide
                     && lengthSecondSide + lengthThirdSide > lengthFirstSide
-        ) { "kjh" }
+        ) { "You entered an invalid triangle!!!" }
     }
 
     private var s: Double = 0.0
@@ -28,5 +28,9 @@ class Triangle(
             )
         } else s
         return s
+    }
+
+    override fun toString(): String {
+        return "Triangle(first side length = $lengthFirstSide, second side length = $lengthSecondSide, third side length = $lengthThirdSide)"
     }
 }

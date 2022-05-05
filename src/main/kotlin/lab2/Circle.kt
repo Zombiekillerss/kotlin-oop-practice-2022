@@ -6,7 +6,7 @@ import kotlin.math.pow
 class Circle(private val radius: Double, override val borderColor: Color, override val fillColor: Color) :
     Figure {
     init {
-        require(radius > 0) { "lol" }
+        require(radius > 0) { "Radius entered incorrectly!!" }
     }
 
     private var s: Double = 0.0
@@ -15,5 +15,9 @@ class Circle(private val radius: Double, override val borderColor: Color, overri
             PI * radius.pow(2.0)
         else s
         return s
+    }
+
+    override fun toString(): String {
+        return "Circle(radius = $radius)"
     }
 }
