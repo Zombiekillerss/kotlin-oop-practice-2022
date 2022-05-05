@@ -158,6 +158,13 @@ internal class ShapeCollectorTest {
 
     @Test
     fun getSumArea() {
+        val figure1 = Circle(10.8,Color(),Color())
+        val figure2 = Circle(9.0,Color(),Color())
+        val expected = figure1.calcArea() + figure2.calcArea()
+        val collector = ShapeCollector()
+        collector.addFigure(figure1)
+        collector.addFigure(figure2)
+        assertEquals(expected, collector.getSumArea())
     }
 
     @Test
