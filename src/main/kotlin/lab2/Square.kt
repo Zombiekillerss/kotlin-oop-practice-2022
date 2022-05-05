@@ -19,4 +19,26 @@ class Square(private val lengthSide: Double, override val borderColor: Color, ov
     override fun toString(): String {
         return "Square(first side length = $lengthSide, second side length = $lengthSide)"
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Square
+
+        if (lengthSide != other.lengthSide) return false
+        if (borderColor != other.borderColor) return false
+        if (fillColor != other.fillColor) return false
+        if (s != other.s) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = lengthSide.hashCode()
+        result = 31 * result + borderColor.hashCode()
+        result = 31 * result + fillColor.hashCode()
+        result = 31 * result + s.hashCode()
+        return result
+    }
 }
