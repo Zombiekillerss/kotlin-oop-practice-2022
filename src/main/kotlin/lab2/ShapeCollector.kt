@@ -28,8 +28,7 @@ class ShapeCollector {
     }
 
     fun getSumArea(): Double {
-        if (sum == 0.0)
-            error("You have not added a figure!")
+        require(sum != 0.0) { "You have not added a figure!" }
         return sum
     }
 
@@ -57,7 +56,7 @@ class ShapeCollector {
         return mapOf(fillColor to (listFigure.filter { it.fillColor == fillColor }))
     }
 
-    fun getListDifferentFigure(): List<List<Figure>>{
+    fun getListDifferentFigure(): List<List<Figure>> {
         return listFigure.let { figure ->
             listOf(
                 figure.filterIsInstance<Circle>(),
