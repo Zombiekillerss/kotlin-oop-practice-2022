@@ -209,6 +209,13 @@ internal class ShapeCollectorTest {
 
     @Test
     fun getFillFigure() {
+        val figure1 = Circle(10.8, Color(), Color(1, 2))
+        val figure2 = Circle(9.0, Color(), Color())
+        val expected = mutableMapOf(Color(1,2) to listOf<Figure>(figure1))
+        val collector = ShapeCollector()
+        collector.addFigure(figure1)
+        collector.addFigure(figure2)
+        assertEquals(expected, collector.getFillFigure(Color(1, 2)))
     }
 
     @Test
