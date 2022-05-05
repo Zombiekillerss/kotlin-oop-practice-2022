@@ -200,7 +200,7 @@ internal class ShapeCollectorTest {
     fun getBorderFigureTest() {
         val figure1 = Circle(10.8, Color(1, 2), Color())
         val figure2 = Circle(9.0, Color(), Color())
-        val expected = mutableMapOf(Color(1,2) to listOf<Figure>(figure1))
+        val expected = mutableMapOf(Color(1, 2) to listOf<Figure>(figure1))
         val collector = ShapeCollector()
         collector.addFigure(figure1)
         collector.addFigure(figure2)
@@ -208,10 +208,10 @@ internal class ShapeCollectorTest {
     }
 
     @Test
-    fun getFillFigure() {
+    fun getFillFigureTest() {
         val figure1 = Circle(10.8, Color(), Color(1, 2))
         val figure2 = Circle(9.0, Color(), Color())
-        val expected = mutableMapOf(Color(1,2) to listOf<Figure>(figure1))
+        val expected = mutableMapOf(Color(1, 2) to listOf<Figure>(figure1))
         val collector = ShapeCollector()
         collector.addFigure(figure1)
         collector.addFigure(figure2)
@@ -219,6 +219,18 @@ internal class ShapeCollectorTest {
     }
 
     @Test
-    fun getListDifferentFigure() {
+    fun getListDifferentFigureTest() {
+        val figures = ShapeCollector()
+        figures.addFigure(Circle(2.0, Color(2, 2, 2), Color(3, 3)))
+        figures.addFigure(Square(2.0, Color(2, 2, 2), Color(3)))
+        figures.addFigure(Rectangle(2.0, 3.0, Color(2, 2, 2), Color(3, 3)))
+        figures.addFigure(Triangle(2.0, 3.0, 2.0, Color(2, 0, 2), Color(3)))
+        val expected = listOf(
+            listOf(Circle(2.0, Color(2, 2, 2), Color(3, 3))),
+            listOf(Square(2.0, Color(2, 2, 2), Color(3))),
+            listOf(Rectangle(2.0, 3.0, Color(2, 2, 2), Color(3, 3))),
+            listOf(Triangle(2.0, 3.0, 2.0, Color(2, 0, 2), Color(3)))
+        )
+        assertEquals(expected, figures.getListDifferentFigure())
     }
 }
