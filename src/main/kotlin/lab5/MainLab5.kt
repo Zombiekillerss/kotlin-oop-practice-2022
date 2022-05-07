@@ -46,6 +46,6 @@ fun main() {
     println("")
     println(figures.getSorted(FigureComparator()))
     println("")
-    figures.addAll(listOf(Circle(1.0,Color(),Color())))
+    figures.addAll(listOf(Circle(1.0, Color(), Color())))
     println(figures.getListFigure())
 }

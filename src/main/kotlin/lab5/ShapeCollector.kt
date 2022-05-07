@@ -1,6 +1,6 @@
 package lab5
 
-class ShapeCollector<Figure: ColoredShape2d> {
+class ShapeCollector<Figure : ColoredShape2d> {
     private var listFigure: MutableList<Figure> = mutableListOf()
     private var maxS: Figure? = null
     private var minS: Figure? = null
@@ -56,11 +56,11 @@ class ShapeCollector<Figure: ColoredShape2d> {
         return mapOf(fillColor to (listFigure.filter { it.fillColor == fillColor }))
     }
 
-    fun addAll(newListFigure: Collection<Figure>){
+    fun addAll(newListFigure: Collection<Figure>) {
         listFigure.addAll(newListFigure)
     }
 
-    fun getSorted(newComparator: Comparator<Figure>): List<Figure>{
+    fun getSorted(newComparator: Comparator<Figure>): List<Figure> {
         val sortList = listFigure
         sortList.sortWith(newComparator)
         return sortList
