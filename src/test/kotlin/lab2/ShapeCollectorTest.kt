@@ -225,12 +225,15 @@ internal class ShapeCollectorTest {
         figures.addFigure(Square(2.0, Color(2, 2, 2), Color(3)))
         figures.addFigure(Rectangle(2.0, 3.0, Color(2, 2, 2), Color(3, 3)))
         figures.addFigure(Triangle(2.0, 3.0, 2.0, Color(2, 0, 2), Color(3)))
-        val expected = listOf(
-            listOf(Circle(2.0, Color(2, 2, 2), Color(3, 3))),
-            listOf(Square(2.0, Color(2, 2, 2), Color(3))),
-            listOf(Rectangle(2.0, 3.0, Color(2, 2, 2), Color(3, 3))),
+        val expected = mutableMapOf<Class<Any>, List<Figure>>()
+        expected[Circle(2.0, Color(), Color()).javaClass] =
+            listOf(Circle(2.0, Color(2, 2, 2), Color(3, 3)))
+        expected[Square(2.0, Color(), Color()).javaClass] =
+            listOf(Square(2.0, Color(2, 2, 2), Color(3)))
+        expected[Rectangle(2.0, 3.0, Color(), Color()).javaClass] =
+            listOf(Rectangle(2.0, 3.0, Color(2, 2, 2), Color(3, 3)))
+        expected[Triangle(2.0, 3.0, 2.0, Color(), Color()).javaClass] =
             listOf(Triangle(2.0, 3.0, 2.0, Color(2, 0, 2), Color(3)))
-        )
         assertEquals(expected, figures.getListDifferentFigure())
     }
 }

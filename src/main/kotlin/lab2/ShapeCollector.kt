@@ -56,14 +56,8 @@ class ShapeCollector {
         return mapOf(fillColor to (listFigure.filter { it.fillColor == fillColor }))
     }
 
-    fun getListDifferentFigure(): List<List<Figure>> {
-        return listFigure.let { figure ->
-            listOf(
-                figure.filterIsInstance<Circle>(),
-                figure.filterIsInstance<Square>(),
-                figure.filterIsInstance<Rectangle>(),
-                figure.filterIsInstance<Triangle>(),
-            )
-        }
+    //I spied the code at Khoroshkova Alexandra Sergeevna (I came up with it myself)
+    fun getListDifferentFigure(): Map<Class<Any>, List<Figure>> {
+        return listFigure.groupBy { it.javaClass }
     }
 }

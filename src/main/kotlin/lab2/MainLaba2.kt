@@ -1,18 +1,11 @@
 package lab2
 
-fun printList(listListFigures: List<List<Figure>>) {
+fun printList(listListFigures: Collection<List<Figure>>) {
     if (listListFigures.isNotEmpty()) {
         for (i in listListFigures) {
-            for (j in i) {
-                when (i) {
-                    listListFigures[0] -> print(j)
-                    listListFigures[1] -> print(j)
-                    listListFigures[2] -> print(j)
-                    listListFigures[3] -> print(j)
-                }
-            }
-            if (i.isNotEmpty()) println("")
+            println(i)
         }
+        println("")
     }
 }
 
@@ -26,12 +19,14 @@ fun main() {
     val figures = ShapeCollector()
     figures.addFigure(Circle(2.0, Color(2, 2, 2), Color(3, 3)))
     var listListFigures = figures.getListDifferentFigure()
-    printList(listListFigures)
+    printList(listListFigures.values)
+    print(listListFigures.keys)
     figures.addFigure(Square(2.0, Color(2, 2, 2), Color(3)))
     figures.addFigure(Rectangle(2.0, 3.0,Color(2, 2, 2), Color(3, 3)))
     figures.addFigure(Triangle(2.0, 3.0, 2.0, Color(2, 0, 2), Color(3)))
     listListFigures = figures.getListDifferentFigure()
-    printList(listListFigures)
+    printList(listListFigures.values)
+    println(listListFigures.keys)
     println(figures.getFigureSmallest())
     println(figures.getFigureLargest())
     println("Sum of all areas ${figures.getSumArea()}")
