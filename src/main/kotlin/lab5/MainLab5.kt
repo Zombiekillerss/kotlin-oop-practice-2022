@@ -43,4 +43,6 @@ fun main() {
     figures.getBorderFigure(Color(2, 0, 2))[Color(2, 0, 2)]?.let { printListFigures(it) }
     println("")
     figures.getFillFigure(Color(3, 3))[Color(3, 3)]?.let { printListFigures(it) }
+    println("")
+    println(figures.getSorted(FigureComparator()))
 }
