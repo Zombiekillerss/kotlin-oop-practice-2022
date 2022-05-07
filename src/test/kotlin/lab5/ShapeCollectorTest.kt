@@ -24,6 +24,19 @@ internal class ShapeCollectorTest {
     }
 
     @Test
-    fun getSorted() {
+    fun getSortedTest() {
+        val figures = ShapeCollector<ColoredShape2d>()
+        figures.addFigure(Circle(2.0, Color(2, 2, 2), Color(3, 3)))
+        figures.addFigure(Square(2.0, Color(2, 2, 2), Color(3)))
+        figures.addFigure(Rectangle(2.0, 3.0, Color(2, 2, 2), Color(3, 3)))
+        figures.addFigure(Triangle(2.0, 3.0, 2.0, Color(2, 0, 2), Color(3)))
+        val actual = figures.getSorted(FigureComparator())
+        val expected = listOf(
+            Triangle(2.0, 3.0, 2.0, Color(2, 0, 2), Color(3)),
+            Square(2.0, Color(2, 2, 2), Color(3)),
+            Rectangle(2.0, 3.0, Color(2, 2, 2), Color(3, 3)),
+            Circle(2.0, Color(2, 2, 2), Color(3, 3))
+        )
+        assertEquals(expected, actual)
     }
 }
