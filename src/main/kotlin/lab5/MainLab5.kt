@@ -45,4 +45,7 @@ fun main() {
     figures.getFillFigure(Color(3, 3))[Color(3, 3)]?.let { printListFigures(it) }
     println("")
     println(figures.getSorted(FigureComparator()))
+    println("")
+    figures.addAll(listOf(Circle(1.0,Color(),Color())))
+    println(figures.getListFigure())
 }
