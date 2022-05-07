@@ -197,7 +197,7 @@ internal class ServiceTest {
                 Phone("908", PhoneType.HOME),
                 Phone("907", PhoneType.HOME)
             )
-            assertEquals(listContact,service.getPersonContacts(person))
+            assertEquals(listContact, service.getPersonContacts(person))
         }
         testErrorNoPerson()
         testGetContactsPerson()
@@ -235,7 +235,7 @@ internal class ServiceTest {
             val listContact = listOf<Contact>(
                 Phone("90", PhoneType.HOME)
             )
-            assertEquals(listContact,service.getPersonPhones(person))
+            assertEquals(listContact, service.getPersonPhones(person))
         }
         testErrorNoPerson()
         testGetPhonesPerson()
@@ -273,7 +273,7 @@ internal class ServiceTest {
             val listContact = listOf<Contact>(
                 Email("vasya.100@mail.ru")
             )
-            assertEquals(listContact,service.getPersonEmails(person))
+            assertEquals(listContact, service.getPersonEmails(person))
         }
         testErrorNoPerson()
         testGetEmailsPerson()
@@ -311,7 +311,7 @@ internal class ServiceTest {
             val listContact = listOf<Contact>(
                 LinkProfile("test", "https://vk.com")
             )
-            assertEquals(listContact,service.getPersonLinks(person))
+            assertEquals(listContact, service.getPersonLinks(person))
         }
         testErrorNoPerson()
         testGetLinksPerson()
@@ -349,7 +349,7 @@ internal class ServiceTest {
             val listContact = listOf<Contact>(
                 Address("89798", "Санкт-Петербург", "Улица", "897")
             )
-            assertEquals(listContact,service.getPersonAddress(person))
+            assertEquals(listContact, service.getPersonAddress(person))
         }
         testErrorNoPerson()
         testGetAddressPerson()
@@ -359,30 +359,30 @@ internal class ServiceTest {
     fun findPersonsTests() {
 
         @Test
-        fun testErrorNoPerson(){
+        fun testErrorNoPerson() {
             val service = Service()
-            try{
+            try {
                 service.findPersons("test", ",k")
                 assert(false)
-            }catch (e: IllegalStateException){
+            } catch (e: IllegalStateException) {
                 assertEquals("There are no people in the service!", e.message)
             }
         }
 
         @Test
-        fun testFindPerson(){
+        fun testFindPerson() {
             val service = Service()
             var person = Person("Test", "Alexandr")
-            service.addContact(person, Phone("90",PhoneType.MOBILE))
+            service.addContact(person, Phone("90", PhoneType.MOBILE))
             person = Person("Test1", "Alexandr1")
-            service.addContact(person, Phone("90",PhoneType.MOBILE))
+            service.addContact(person, Phone("90", PhoneType.MOBILE))
             person = Person("Fest1", "Alexandr1")
-            service.addContact(person, Phone("90",PhoneType.MOBILE))
+            service.addContact(person, Phone("90", PhoneType.MOBILE))
             val listPerson = listOf(
                 Person("Test", "Alexandr"),
                 Person("Test1", "Alexandr1")
             )
-            assertEquals(listPerson, service.findPersons("Tes","Alex"))
+            assertEquals(listPerson, service.findPersons("Tes", "Alex"))
         }
         testErrorNoPerson()
         testFindPerson()
