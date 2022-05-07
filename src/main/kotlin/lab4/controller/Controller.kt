@@ -29,7 +29,7 @@ class Controller(private val model: Model) {
                     println(e.message)
                 }
             }
-            if(state == State.EXIT)
+            if (state == State.EXIT)
                 break
         }
     }

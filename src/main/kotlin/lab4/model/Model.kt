@@ -73,7 +73,7 @@ class Model {
         _board[row][col] = EMPTY
         _board[newR][newC] = PLAYER
 
-        if(statePlayer == State.KEEP)
+        if (statePlayer == State.KEEP)
             saveGame()
 
         notifyListeners()
@@ -85,10 +85,10 @@ class Model {
         col = newC
     }
 
-    private fun saveGame(){
+    private fun saveGame() {
         val writer = File("src/main/kotlin/lab4/labyrinth.txt").bufferedWriter()
-        for(i in board){
-            for(j in i){
+        for (i in board) {
+            for (j in i) {
                 writer.write(j.toString())
             }
             writer.newLine()
