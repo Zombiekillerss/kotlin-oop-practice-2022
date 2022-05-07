@@ -122,11 +122,10 @@ class Service : ContactsService {
     }
 
     override fun removeContact(person: Person, contact: Contact) {
-        if(listPersons.containsKey(person)) {
+        if (listPersons.containsKey(person)) {
             if (listPersons[person]?.remove(contact) == false)
                 error("No such value!!!")
-        }
-        else error("There is no person with that firstname or lastname!")
+        } else error("There is no person with that firstname or lastname!")
     }
 
     override fun removePerson(person: Person) {
@@ -196,7 +195,6 @@ class Service : ContactsService {
                     subLastName
                 ) == 0
             }.keys.toList()
-        }
-        else error("There are no people in the service!")
+        } else error("There are no people in the service!")
     }
 }
