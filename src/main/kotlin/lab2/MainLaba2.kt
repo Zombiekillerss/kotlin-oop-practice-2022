@@ -22,7 +22,7 @@ fun main() {
     printList(listListFigures.values)
     print(listListFigures.keys)
     figures.addFigure(Square(2.0, Color(2, 2, 2), Color(3)))
-    figures.addFigure(Rectangle(2.0, 3.0,Color(2, 2, 2), Color(3, 3)))
+    figures.addFigure(Rectangle(2.0, 3.0, Color(2, 2, 2), Color(3, 3)))
     figures.addFigure(Triangle(2.0, 3.0, 2.0, Color(2, 0, 2), Color(3)))
     listListFigures = figures.getListDifferentFigure()
     printList(listListFigures.values)
