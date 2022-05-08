@@ -2,7 +2,7 @@ package lab6
 
 import java.io.File
 
-class CollectorFile {
+class ListFigureFile {
     fun serializationToFile(listFigure: List<Figure>, pathToFile: String) {
         val collSer = ListFigureSerDes()
         File(pathToFile).writeText(collSer.serialization(listFigure))
