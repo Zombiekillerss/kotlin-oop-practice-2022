@@ -1,0 +1,1 @@
+[{"type":"lab6.Circle","radius":2.0,"borderColor":{},"fillColor":{},"s":12.566370614359172},{"type":"lab6.Rectangle","lengthFirstSide":2.0,"lengthSecondSide":2.0,"borderColor":{},"fillColor":{},"s":4.0},{"type":"lab6.Triangle","lengthFirstSide":1.2,"lengthSecondSide":2.9,"lengthThirdSide":3.0,"borderColor":{},"fillColor":{}}]
