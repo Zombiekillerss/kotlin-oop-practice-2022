@@ -1,5 +1,7 @@
 package lab6
 
+import lab2.*
+
 fun main() {
     val collector = ShapeCollector()
     collector.addFigure(Circle(2.0, Color(), Color()))
