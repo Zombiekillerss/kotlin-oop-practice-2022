@@ -1,110 +1,16 @@
 package lab3
 
-class Person(
-    val firstName: String,
-    val lastName: String
-) {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Person
-
-        if (firstName != other.firstName) return false
-        if (lastName != other.lastName) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = firstName.hashCode()
-        result = 31 * result + lastName.hashCode()
-        return result
-    }
-}
+data class Person(val firstName: String, val lastName: String)
 
 sealed class Contact
 
-data class Phone(val number: String, val type: PhoneType) : Contact() {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+data class Phone(val number: String, val type: PhoneType) : Contact()
 
-        other as Phone
+data class Email(val email: String) : Contact()
 
-        if (number != other.number) return false
-        if (type != other.type) return false
+data class LinkProfile(val name: String, val url: String) : Contact()
 
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = number.hashCode()
-        result = 31 * result + type.hashCode()
-        return result
-    }
-}
-
-data class Email(val email: String) : Contact() {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Email
-
-        if (email != other.email) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        return email.hashCode()
-    }
-}
-
-data class LinkProfile(val name: String, val url: String) : Contact() {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as LinkProfile
-
-        if (name != other.name) return false
-        if (url != other.url) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = name.hashCode()
-        result = 31 * result + url.hashCode()
-        return result
-    }
-}
-
-data class Address(val postcode: String, val city: String, val street: String, val houseNumber: String) : Contact() {
-    override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Address
-
-        if (postcode != other.postcode) return false
-        if (city != other.city) return false
-        if (street != other.street) return false
-        if (houseNumber != other.houseNumber) return false
-
-        return true
-    }
-
-    override fun hashCode(): Int {
-        var result = postcode.hashCode()
-        result = 31 * result + city.hashCode()
-        result = 31 * result + street.hashCode()
-        result = 31 * result + houseNumber.hashCode()
-        return result
-    }
-}
+data class Address(val postcode: String, val city: String, val street: String, val houseNumber: String) : Contact()
 
 enum class PhoneType {
     MOBILE,
