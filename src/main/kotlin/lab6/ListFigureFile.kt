@@ -1,5 +1,6 @@
 package lab6
 
+import lab2.Figure
 import java.io.File
 
 class ListFigureFile {
