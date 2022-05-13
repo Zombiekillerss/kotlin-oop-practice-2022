@@ -1,5 +1,8 @@
 package lab2
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Color(val red: Int = 0, val green: Int = 0, val blue: Int = 0, val transparency: Int = 0) {
     init {
         require(red in 0 until 256) { "Incorrect red value entered" }

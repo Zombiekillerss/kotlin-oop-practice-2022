@@ -1,5 +1,8 @@
 package lab2
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 class ShapeCollector {
     private var listFigure: MutableList<Figure> = mutableListOf()
     private var maxS: Figure? = null

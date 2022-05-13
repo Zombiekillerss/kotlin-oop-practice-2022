@@ -1,5 +1,8 @@
 package lab5
 
+import lab2.Color
+import lab2.ColoredShape2d
+
 class ShapeCollector<Figure : ColoredShape2d> {
     private var listFigure: MutableList<Figure> = mutableListOf()
     private var maxS: Figure? = null

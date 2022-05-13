@@ -1,5 +1,7 @@
 package lab5
 
+import lab2.*
+
 fun printList(listListFigures: Collection<List<ColoredShape2d>>) {
     if (listListFigures.isNotEmpty()) {
         for (i in listListFigures) {

@@ -1,5 +1,8 @@
 package lab2
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 class Rectangle(
     private val lengthFirstSide: Double,
     private val lengthSecondSide: Double,

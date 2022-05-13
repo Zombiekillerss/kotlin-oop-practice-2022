@@ -1,7 +1,9 @@
 package lab2
 
+import kotlinx.serialization.Serializable
 import kotlin.math.sqrt
 
+@Serializable
 class Triangle(
     private val lengthFirstSide: Double = 0.0,
     private val lengthSecondSide: Double = 0.0,

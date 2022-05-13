@@ -1,7 +1,9 @@
 package lab2
 
+import kotlinx.serialization.Serializable
 import kotlin.math.pow
 
+@Serializable
 class Square(private val lengthSide: Double, override val borderColor: Color, override val fillColor: Color) :
     Figure {
     init {

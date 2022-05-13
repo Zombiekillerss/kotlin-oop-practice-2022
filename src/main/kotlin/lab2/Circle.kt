@@ -2,7 +2,9 @@ package lab2
 
 import kotlin.math.PI
 import kotlin.math.pow
+import kotlinx.serialization.Serializable
 
+@Serializable
 class Circle(private val radius: Double, override val borderColor: Color, override val fillColor: Color) :
     Figure {
     init {

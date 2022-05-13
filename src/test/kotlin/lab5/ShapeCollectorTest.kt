@@ -1,5 +1,6 @@
 package lab5
 
+import lab2.*
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
