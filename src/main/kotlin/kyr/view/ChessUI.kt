@@ -9,13 +9,13 @@ import javax.swing.*
 
 private const val GAP = 10
 
-class ChessUI : JFrame("Tic Tac Toe"), ModelChangeListener {
+class ChessUI : JFrame("Chess"), ModelChangeListener {
     private var gameModel: Model = Model()
     private val statusLabel = JLabel("Status", JLabel.CENTER)
     private val buttons = mutableListOf<MutableList<JButton>>()
 
     init {
-        setSize(500, 500)
+        setSize(900, 700)
         defaultCloseOperation = EXIT_ON_CLOSE
 
         updateFont(statusLabel, 20.0f)
@@ -23,11 +23,22 @@ class ChessUI : JFrame("Tic Tac Toe"), ModelChangeListener {
         rootPane.contentPane = JPanel(BorderLayout(GAP, GAP)).apply {
             add(statusLabel, BorderLayout.NORTH)
             add(createBoardPanel(), BorderLayout.CENTER)
-            add(createRestartButton(), BorderLayout.SOUTH)
+            add(createButtonsTransformation(), BorderLayout.SOUTH)
             border = BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP)
         }
 
         resubscribe()
+    }
+
+    private fun createButtonsTransformation(): Component{
+        val panel = JPanel(BorderLayout(GAP, GAP)).apply {
+            add(createRestartButton())
+            add(JButton("Ф"))
+            add(JButton("К"))
+            add(JButton("С"))
+            add(JButton("Л"))
+        }
+        return panel
     }
 
     private fun createRestartButton(): Component {
@@ -99,10 +110,10 @@ class ChessUI : JFrame("Tic Tac Toe"), ModelChangeListener {
                 val cell = gameModel.board[i][j]
                 button.text = cell.toString()
 
-                button.isEnabled = cell == Cell.EMPTY && state in GAME_NOT_FINISHED
+                //button.isEnabled = cell == Cell.EMPTY && state in GAME_NOT_FINISHED
                 button.foreground = when (cell) {
-                    Cell.EMPTY -> Color.WHITE
-                    else -> {Color.WHITE}
+                    Cell.EMPTY -> Color.BLACK
+                    else -> {Color.BLACK}
                 }
             }
         }

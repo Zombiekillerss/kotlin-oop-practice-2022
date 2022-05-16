@@ -1,7 +1,7 @@
 package lab4.model
 
 import lab4.model.Cell.*
-import java.io.File
+import lab4.workwithfile.WorkWithFile
 
 enum class Cell(private val textValue: String) {
     PLAYER("P"),
@@ -31,11 +31,15 @@ interface ModelChangeListener {
     fun onModelChanged()
 }
 
-private val LAB = File("src/main/kotlin/lab4/labyrinth.txt").readLines()
-private val BOARD_SIZE_COL = LAB[0].length
-private val BOARD_SIZE_ROW = LAB.size
+//private val LAB = File("src/main/kotlin/lab4/labyrinth.txt").readLines()
+//private val BOARD_SIZE_COL = LAB[0].length
+//private val BOARD_SIZE_ROW = LAB.size
+private val workWithFile = WorkWithFile()
 
 class Model {
+    private val labyrinth = workWithFile.getLabyrinth()
+    private val boardSizeCol = labyrinth[0].length
+    private val boardSizeRow = labyrinth.size
     private val _board: MutableList<MutableList<Cell>> = initEmptyBoard()
     private var row = 0
     private var col = 0
@@ -63,7 +67,7 @@ class Model {
             else -> require(statePlayer != State.EXIT) { "Game finished" }
         }
 
-        require(newR in 0 until BOARD_SIZE_ROW && newC in 0 until BOARD_SIZE_COL) { "Wrong move" }
+        require(newR in 0 until boardSizeRow && newC in 0 until boardSizeCol) { "Wrong move" }
         require(_board[newR][newC] != WALL) { "Wrong move" }
 
         // check win
@@ -86,14 +90,7 @@ class Model {
     }
 
     private fun saveGame() {
-        val writer = File("src/main/kotlin/lab4/labyrinth.txt").bufferedWriter()
-        for (i in board) {
-            for (j in i) {
-                writer.write(j.toString())
-            }
-            writer.newLine()
-        }
-        writer.close()
+        workWithFile.writeToFile(board)
     }
 
     private fun notifyListeners() {
@@ -107,7 +104,7 @@ class Model {
     private fun initEmptyBoard(): MutableList<MutableList<Cell>> {
         val mapLab = mutableListOf<MutableList<Cell>>()
         var newRow = mutableListOf<Cell>()
-        for (i in LAB) {
+        for (i in labyrinth) {
             for (j in i) {
                 when (j) {
                     EMPTY.toString()[0] -> newRow.add(EMPTY)
@@ -115,12 +112,12 @@ class Model {
                     PLAYER.toString()[0] -> newRow.add(PLAYER)
                     WALL.toString()[0] -> newRow.add(WALL)
                 }
-                if (LAB[row][col] != PLAYER.toString()[0]) {
+                if (labyrinth[row][col] != PLAYER.toString()[0]) {
                     col++
                     col %= i.length
                 }
             }
-            if (LAB[row][col] != PLAYER.toString()[0])
+            if (labyrinth[row][col] != PLAYER.toString()[0])
                 row++
             mapLab.add(newRow)
             newRow = mutableListOf()
