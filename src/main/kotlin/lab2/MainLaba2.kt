@@ -1,6 +1,6 @@
 package lab2
 
-fun printList(listListFigures: Collection<List<Figure>>) {
+fun printList(listListFigures: Collection<List<ColoredShape2d>>) {
     if (listListFigures.isNotEmpty()) {
         for (i in listListFigures) {
             println(i)
@@ -9,14 +9,14 @@ fun printList(listListFigures: Collection<List<Figure>>) {
     }
 }
 
-fun printListFigures(listFigures: List<Figure>) {
+fun printListFigures(listFigures: List<ColoredShape2d>) {
     for (i in listFigures) {
         println(i)
     }
 }
 
 fun main() {
-    val figures = ShapeCollector()
+    val figures = ShapeCollector<ColoredShape2d>()
     figures.addFigure(Circle(2.0, Color(2, 2, 2), Color(3, 3)))
     var listListFigures = figures.getListDifferentFigure()
     printList(listListFigures.values)

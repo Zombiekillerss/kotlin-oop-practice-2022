@@ -3,7 +3,7 @@ package lab2
 import kotlinx.serialization.Serializable
 
 @Serializable
-class ShapeCollector {
+class ShapeCollector<Figure : ColoredShape2d> {
     private var listFigure: MutableList<Figure> = mutableListOf()
     private var maxS: Figure? = null
     private var minS: Figure? = null
@@ -41,6 +41,16 @@ class ShapeCollector {
 
     fun findFillColor(fillColor: Color): List<Figure> {
         return listFigure.filter { it.fillColor == fillColor } as MutableList<Figure>
+    }
+
+    fun addAll(newListFigure: Collection<Figure>) {
+        listFigure.addAll(newListFigure)
+    }
+
+    fun getSorted(newComparator: Comparator<Figure>): List<Figure> {
+        val sortList = listFigure
+        sortList.sortWith(newComparator)
+        return sortList
     }
 
     fun getListFigure(): List<Figure> {

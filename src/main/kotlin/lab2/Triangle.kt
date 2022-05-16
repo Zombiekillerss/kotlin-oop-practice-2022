@@ -10,8 +10,7 @@ class Triangle(
     private val lengthThirdSide: Double = 0.0,
     override val borderColor: Color,
     override val fillColor: Color
-) :
-    Figure {
+) : ColoredShape2d {
     init {
         require(lengthFirstSide > 0.0 && lengthSecondSide > 0.0 && lengthThirdSide > 0.0) { "Side lengths entered incorrectly!!" }
         require(

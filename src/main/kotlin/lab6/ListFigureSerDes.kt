@@ -12,7 +12,7 @@ import lab2.*
 class ListFigureSerDes {
     private val json = Json {
         serializersModule = SerializersModule {
-            polymorphic(Figure::class) {
+            polymorphic(ColoredShape2d::class) {
                 subclass(Circle::class)
                 subclass(Rectangle::class)
                 subclass(Square::class)
@@ -21,11 +21,11 @@ class ListFigureSerDes {
         }
     }
 
-    fun serialization(listFigure: List<Figure>): String {
+    fun serialization(listFigure: List<ColoredShape2d>): String {
         return json.encodeToString(listFigure)
     }
 
-    fun deserialization(stringToDecoder: String): List<Figure> {
+    fun deserialization(stringToDecoder: String): List<ColoredShape2d> {
         return json.decodeFromString(stringToDecoder)
     }
 }

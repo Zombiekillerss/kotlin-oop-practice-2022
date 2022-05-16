@@ -5,7 +5,7 @@ import kotlin.math.pow
 
 @Serializable
 class Square(private val lengthSide: Double, override val borderColor: Color, override val fillColor: Color) :
-    Figure {
+    ColoredShape2d {
     init {
         require(lengthSide > 0) { "Side lengths entered incorrectly!!" }
     }

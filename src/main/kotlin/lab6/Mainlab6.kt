@@ -3,7 +3,7 @@ package lab6
 import lab2.*
 
 fun main() {
-    val collector = ShapeCollector()
+    val collector = ShapeCollector<ColoredShape2d>()
     collector.addFigure(Circle(2.0, Color(), Color()))
     collector.addFigure(Rectangle(2.0, 2.0, Color(), Color()))
     val fileColl = ListFigureFile()

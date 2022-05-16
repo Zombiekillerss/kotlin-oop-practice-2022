@@ -8,8 +8,7 @@ class Rectangle(
     private val lengthSecondSide: Double,
     override val borderColor: Color,
     override val fillColor: Color
-) :
-    Figure {
+) : ColoredShape2d {
     init {
         require(lengthFirstSide > 0 && lengthSecondSide > 0) { "Side lengths entered incorrectly!!" }
     }

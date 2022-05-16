@@ -1,12 +1,12 @@
 package lab2
 
+import kotlinx.serialization.Serializable
 import kotlin.math.PI
 import kotlin.math.pow
-import kotlinx.serialization.Serializable
 
 @Serializable
 class Circle(private val radius: Double, override val borderColor: Color, override val fillColor: Color) :
-    Figure {
+    ColoredShape2d {
     init {
         require(radius > 0) { "Radius entered incorrectly!!" }
     }

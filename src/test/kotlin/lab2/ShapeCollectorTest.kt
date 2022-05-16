@@ -9,7 +9,7 @@ internal class ShapeCollectorTest {
     fun addFigureTests() {
         @Test
         fun addCircleWithException() {
-            val collector = ShapeCollector()
+            val collector = ShapeCollector<ColoredShape2d>()
             try {
                 collector.addFigure(Circle(-9.9, Color(), Color()))
                 assert(false)
@@ -21,7 +21,7 @@ internal class ShapeCollectorTest {
 
         @Test
         fun addSquareWithException() {
-            val collector = ShapeCollector()
+            val collector = ShapeCollector<ColoredShape2d>()
             try {
                 collector.addFigure(Square(-9.9, Color(), Color()))
                 assert(false)
@@ -33,7 +33,7 @@ internal class ShapeCollectorTest {
 
         @Test
         fun addRectangleWithException() {
-            val collector = ShapeCollector()
+            val collector = ShapeCollector<ColoredShape2d>()
             try {
                 collector.addFigure(Rectangle(-9.9, -9.9, Color(), Color()))
                 assert(false)
@@ -45,7 +45,7 @@ internal class ShapeCollectorTest {
 
         @Test
         fun addTriangleWithException() {
-            val collector = ShapeCollector()
+            val collector = ShapeCollector<ColoredShape2d>()
             try {
                 collector.addFigure(Triangle(-9.9, 0.0, -9.8, Color(), Color()))
                 assert(false)
@@ -64,7 +64,7 @@ internal class ShapeCollectorTest {
 
         @Test
         fun addFigureWithColorException() {
-            val collector = ShapeCollector()
+            val collector = ShapeCollector<ColoredShape2d>()
             try {
                 collector.addFigure(Circle(1.0, Color(-1), Color()))
                 assert(false)
@@ -97,10 +97,10 @@ internal class ShapeCollectorTest {
 
         @Test
         fun addFigures() {
-            val collector = ShapeCollector()
+            val collector = ShapeCollector<ColoredShape2d>()
             collector.addFigure(Circle(8.0, Color(), Color()))
             collector.addFigure(Circle(10.0, Color(), Color()))
-            val list = listOf<Figure>(Circle(8.0, Color(), Color()), Circle(10.0, Color(), Color()))
+            val list = listOf<ColoredShape2d>(Circle(8.0, Color(), Color()), Circle(10.0, Color(), Color()))
             assertEquals(list, collector.getListFigure())
         }
 
@@ -116,14 +116,14 @@ internal class ShapeCollectorTest {
     fun getFigureSmallestTest() {
         @Test
         fun getFigureSmallestNull() {
-            val collector = ShapeCollector()
+            val collector = ShapeCollector<ColoredShape2d>()
             val expected = null
             assertEquals(expected, collector.getFigureSmallest())
         }
 
         @Test
         fun getFigureSmallest() {
-            val collector = ShapeCollector()
+            val collector = ShapeCollector<ColoredShape2d>()
             collector.addFigure(Circle(9.0, Color(), Color()))
             collector.addFigure(Circle(10.0, Color(), Color()))
             val expected = Circle(9.0, Color(), Color())
@@ -138,14 +138,14 @@ internal class ShapeCollectorTest {
     fun getFigureLargest() {
         @Test
         fun getFigureLargestNull() {
-            val collector = ShapeCollector()
+            val collector = ShapeCollector<ColoredShape2d>()
             val expected = null
             assertEquals(expected, collector.getFigureLargest())
         }
 
         @Test
         fun getFigureLargest() {
-            val collector = ShapeCollector()
+            val collector = ShapeCollector<ColoredShape2d>()
             collector.addFigure(Circle(9.0, Color(), Color()))
             collector.addFigure(Circle(10.0, Color(), Color()))
             val expected = Circle(10.0, Color(), Color())
@@ -161,7 +161,7 @@ internal class ShapeCollectorTest {
         val figure1 = Circle(10.8, Color(), Color())
         val figure2 = Circle(9.0, Color(), Color())
         val expected = figure1.calcArea() + figure2.calcArea()
-        val collector = ShapeCollector()
+        val collector = ShapeCollector<ColoredShape2d>()
         try {
             collector.getSumArea()
             assert(false)
@@ -178,8 +178,8 @@ internal class ShapeCollectorTest {
     fun findBorderColorTest() {
         val figure1 = Circle(10.8, Color(1, 2), Color())
         val figure2 = Circle(9.0, Color(), Color())
-        val expected = listOf<Figure>(figure1)
-        val collector = ShapeCollector()
+        val expected = listOf<ColoredShape2d>(figure1)
+        val collector = ShapeCollector<ColoredShape2d>()
         collector.addFigure(figure1)
         collector.addFigure(figure2)
         assertEquals(expected, collector.findBorderColor(Color(1, 2)))
@@ -189,8 +189,8 @@ internal class ShapeCollectorTest {
     fun findFillColorTest() {
         val figure1 = Circle(10.8, Color(), Color(1, 2))
         val figure2 = Circle(9.0, Color(), Color())
-        val expected = listOf<Figure>(figure1)
-        val collector = ShapeCollector()
+        val expected = listOf<ColoredShape2d>(figure1)
+        val collector = ShapeCollector<ColoredShape2d>()
         collector.addFigure(figure1)
         collector.addFigure(figure2)
         assertEquals(expected, collector.findFillColor(Color(1, 2)))
@@ -200,8 +200,8 @@ internal class ShapeCollectorTest {
     fun getBorderFigureTest() {
         val figure1 = Circle(10.8, Color(1, 2), Color())
         val figure2 = Circle(9.0, Color(), Color())
-        val expected = mutableMapOf(Color(1, 2) to listOf<Figure>(figure1))
-        val collector = ShapeCollector()
+        val expected = mutableMapOf(Color(1, 2) to listOf<ColoredShape2d>(figure1))
+        val collector = ShapeCollector<ColoredShape2d>()
         collector.addFigure(figure1)
         collector.addFigure(figure2)
         assertEquals(expected, collector.getBorderFigure(Color(1, 2)))
@@ -211,8 +211,8 @@ internal class ShapeCollectorTest {
     fun getFillFigureTest() {
         val figure1 = Circle(10.8, Color(), Color(1, 2))
         val figure2 = Circle(9.0, Color(), Color())
-        val expected = mutableMapOf(Color(1, 2) to listOf<Figure>(figure1))
-        val collector = ShapeCollector()
+        val expected = mutableMapOf(Color(1, 2) to listOf<ColoredShape2d>(figure1))
+        val collector = ShapeCollector<ColoredShape2d>()
         collector.addFigure(figure1)
         collector.addFigure(figure2)
         assertEquals(expected, collector.getFillFigure(Color(1, 2)))
@@ -220,12 +220,12 @@ internal class ShapeCollectorTest {
 
     @Test
     fun getListDifferentFigureTest() {
-        val figures = ShapeCollector()
+        val figures = ShapeCollector<ColoredShape2d>()
         figures.addFigure(Circle(2.0, Color(2, 2, 2), Color(3, 3)))
         figures.addFigure(Square(2.0, Color(2, 2, 2), Color(3)))
         figures.addFigure(Rectangle(2.0, 3.0, Color(2, 2, 2), Color(3, 3)))
         figures.addFigure(Triangle(2.0, 3.0, 2.0, Color(2, 0, 2), Color(3)))
-        val expected = mutableMapOf<Class<Any>, List<Figure>>()
+        val expected = mutableMapOf<Class<Any>, List<ColoredShape2d>>()
         expected[Circle(2.0, Color(), Color()).javaClass] =
             listOf(Circle(2.0, Color(2, 2, 2), Color(3, 3)))
         expected[Square(2.0, Color(), Color()).javaClass] =

@@ -9,7 +9,7 @@ internal class ListFigureFileTest {
 
     @Test
     fun serializationToFileTest() {
-        val collector = ShapeCollector()
+        val collector = ShapeCollector<ColoredShape2d>()
         collector.addFigure(Circle(2.0, Color(), Color()))
         collector.addFigure(Rectangle(2.0, 2.0, Color(), Color()))
         val fileColl = ListFigureFile()
@@ -22,13 +22,13 @@ internal class ListFigureFileTest {
 
     @Test
     fun deserializationFromFileTest() {
-        val collector = ShapeCollector()
+        val collector = ShapeCollector<ColoredShape2d>()
         collector.addFigure(Circle(2.0, Color(), Color()))
         collector.addFigure(Rectangle(2.0, 2.0, Color(), Color()))
         val fileColl = ListFigureFile()
         collector.addFigure(Triangle(1.2, 2.9, 3.0, Color(), Color()))
         fileColl.serializationToFile(collector.getListFigure(), "src/main/kotlin/lab6/save.txt")
-        val expected = mutableListOf<Figure>(Circle(2.0, Color(), Color()))
+        val expected = mutableListOf<ColoredShape2d>(Circle(2.0, Color(), Color()))
         expected.add(Rectangle(2.0, 2.0, Color(), Color()))
         expected.add(Triangle(1.2, 2.9, 3.0, Color(), Color()))
         assertEquals(expected, fileColl.deserializationFromFile("src/main/kotlin/lab6/save.txt"))
