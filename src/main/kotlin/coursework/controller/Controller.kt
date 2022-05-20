@@ -1,8 +1,8 @@
-package kyr.controller
+package coursework.controller
 
-import kyr.model.Coordinate
-import kyr.model.GAME_NOT_FINISHED
-import kyr.model.Model
+import coursework.model.Coordinate
+import coursework.model.GAME_NOT_FINISHED
+import coursework.model.Model
 
 fun charToInt(input: Char):Int{
     when(input){

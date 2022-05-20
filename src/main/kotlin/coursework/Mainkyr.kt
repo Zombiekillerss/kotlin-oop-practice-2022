@@ -1,6 +1,6 @@
-package kyr
+package coursework
 
-import kyr.view.ChessUI
+import coursework.view.ChessUI
 import javax.swing.SwingUtilities
 
 fun main() {

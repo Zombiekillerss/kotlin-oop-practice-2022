@@ -1,6 +1,6 @@
-package kyr.model
+package coursework.model
 
-import kyr.model.Cell.*
+import coursework.model.Cell.*
 import java.io.File
 
 //pawn, king, queen, knight, rook, bishop,
@@ -32,26 +32,6 @@ enum class State(val textValue: String) {
     WIN_BLACK("Black win"),
     DRAW("Draw")
 }
-
-val GAME_NOT_FINISHED = setOf(State.WHITE_MOVE, State.BLACK_MOVE)
-val GAME_FINISHED = setOf(State.WIN_BLACK, State.WIN_WHITE, State.DRAW)
-val WHITE_FIGURES = setOf(
-    W_PAWN,
-    W_KING,
-    W_QUEEN,
-    W_KNIGHT,
-    W_ROOK,
-    W_BISHOP
-)
-val BLACK_FIGURES = setOf(
-    B_PAWN,
-    B_KING,
-    B_QUEEN,
-    B_KNIGHT,
-    B_ROOK,
-    B_BISHOP
-)
-
 private val FIRST_MOVE = State.WHITE_MOVE
 
 interface ModelChangeListener {

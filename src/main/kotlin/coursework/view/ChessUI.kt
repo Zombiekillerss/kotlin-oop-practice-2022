@@ -1,6 +1,6 @@
-package kyr.view
+package coursework.view
 
-import kyr.model.*
+import coursework.model.*
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Component

@@ -1,7 +1,7 @@
-package kyr.view
+package coursework.view
 
-import kyr.model.Model
-import kyr.model.ModelChangeListener
+import coursework.model.Model
+import coursework.model.ModelChangeListener
 
 class ConsoleUi(private val model: Model) {
     init {
