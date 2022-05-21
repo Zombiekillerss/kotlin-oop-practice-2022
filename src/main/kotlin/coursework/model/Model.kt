@@ -1,53 +1,18 @@
 package coursework.model
 
-import coursework.model.Cell.*
-import java.io.File
-
-//pawn, king, queen, knight, rook, bishop,
-//пешка, король, ферзь, конь, ладья, слон
-enum class Cell(private val textValue: String) {
-    W_PAWN("БП"),
-    W_KING("БКР"),
-    W_QUEEN("БФ"),
-    W_KNIGHT("БК"),
-    W_ROOK("БЛ"),
-    W_BISHOP("БС"),
-    B_PAWN("ЧП"),
-    B_KING("ЧКР"),
-    B_QUEEN("ЧФ"),
-    B_KNIGHT("ЧК"),
-    B_ROOK("ЧЛ"),
-    B_BISHOP("ЧС"),
-    EMPTY(" ");
-
-    override fun toString(): String = textValue
-}
-
-data class Coordinate(var row: Int, var col: Int)
-
-enum class State(val textValue: String) {
-    WHITE_MOVE("White move"),
-    BLACK_MOVE("Black move"),
-    WIN_WHITE("White win"),
-    WIN_BLACK("Black win"),
-    DRAW("Draw")
-}
-private val FIRST_MOVE = State.WHITE_MOVE
+import coursework.contacts.contact.PhoneBook
 
 interface ModelChangeListener {
     fun onModelChanged()
 }
 
-private val FIELD = File("src/main/kotlin/kyr/chess.txt").readLines()
-const val BOARD_SIZE = 8
-
 class Model {
-    private val _board: MutableList<MutableList<Cell>> = initEmptyBoard()
-    val board: List<List<Cell>>
-        get() = _board
+    private val _contacts: MutableList<PhoneBook> = initEmptyBoard()
+    val contacts: List<PhoneBook>
+        get() = _contacts
 
-    var state: State = FIRST_MOVE
-        private set
+    //var state: State = FIRST_MOVE
+    //    private set
 
     private val listeners: MutableSet<ModelChangeListener> = mutableSetOf()
 
@@ -59,17 +24,56 @@ class Model {
         listeners.remove(listener)
     }
 
+    fun addNumber(contact: PhoneBook, number: String) {
+        contact.addNumber(number)
+    }
 
+    fun addNumbers(contact: PhoneBook, numberList: List<String>) {
+        contact.addNumbers(numberList)
+    }
 
-    fun doMove(where: Coordinate, whence: Coordinate) {
-        require(EMPTY != board[whence.row][whence.col]) { "lol" }
-        require(board[whence.row][whence.col] == B_BISHOP && (where.row == where.col ||
-                7 - whence.col == whence.col)) { "lol" }
+    fun removeNumber(contact: PhoneBook, number: String) {
+        contact.removeNumber(number)
+    }
+
+    fun changeNumber(contact: PhoneBook, index: Int, newNumber: String) {
+        contact.changeNumber(index, newNumber)
+    }
+
+    fun addEmail(contact: PhoneBook, email: String) {
+        contact.addEmail(email)
+    }
+
+    fun addEmails(contact: PhoneBook, emailList: List<String>) {
+        contact.addEmails(emailList)
+    }
+
+    fun removeEmail(contact: PhoneBook, email: String) {
+        contact.removeEmail(email)
+    }
+
+    fun changeEmail(contact: PhoneBook, index: Int, newEmail: String) {
+        contact.changeEmail(index, newEmail)
+    }
+
+    fun changeName(contact: PhoneBook, firstName: String, secondName: String, lastName: String) {
+        contact.changeName(firstName,secondName,lastName)
+    }
+
+    fun changeAddress(contact: PhoneBook, city: String, houseNumber: String, postcode: String, street: String) {
+        contact.changeAddress(city,houseNumber,postcode, street)
+    }
+
+    fun changeDate(contact: PhoneBook, day: Int, month: Int, year: Int) {
+        contact.changeDate(day,month,year)
+    }
+
+    fun doMove() {
     }
 
     /*private fun saveGame() {
         val writer = File("src/main/kotlin/lab4/labyrinth.txt").bufferedWriter()
-        for (i in board) {
+        for (i in contacts) {
             for (j in i) {
                 writer.write(j.toString())
                 writer.write(" ")
@@ -83,46 +87,13 @@ class Model {
         listeners.forEach { it.onModelChanged() }
     }
 
-    private fun checkWin(player: Cell): Boolean {
-        return false
-    }
-
-    private fun initEmptyBoard(): MutableList<MutableList<Cell>> {
-        val mapField = mutableListOf<MutableList<Cell>>()
-        var newRow = mutableListOf<Cell>()
-        for (i in FIELD) {
-            val strField = i.split(" ")
-            for (j in strField) {
-                when (j) {
-                    EMPTY.toString() -> newRow.add(EMPTY)
-                    W_PAWN.toString() -> newRow.add(W_PAWN)
-                    W_KING.toString() -> newRow.add(W_KING)
-                    W_QUEEN.toString() -> newRow.add(W_QUEEN)
-                    W_KNIGHT.toString() -> newRow.add(W_KNIGHT)
-                    W_ROOK.toString() -> newRow.add(W_ROOK)
-                    W_BISHOP.toString() -> newRow.add(W_BISHOP)
-                    B_PAWN.toString() -> newRow.add(B_PAWN)
-                    B_KING.toString() -> newRow.add(B_KING)
-                    B_QUEEN.toString() -> newRow.add(B_QUEEN)
-                    B_KNIGHT.toString() -> newRow.add(B_KNIGHT)
-                    B_ROOK.toString() -> newRow.add(B_ROOK)
-                    B_BISHOP.toString() -> newRow.add(B_BISHOP)
-                }
-            }
-            if (newRow.isEmpty()) {
-                for (j in 0 until 8) {
-                    newRow.add(EMPTY)
-                }
-            }
-            mapField.add(newRow)
-            newRow = mutableListOf()
-        }
-        return mapField
+    private fun initEmptyBoard(): MutableList<PhoneBook> {
+        return mutableListOf()
     }
 
     override fun toString(): String {
         return buildString {
-            board.forEach {
+            contacts.forEach {
                 append(it).appendLine()
             }
         }

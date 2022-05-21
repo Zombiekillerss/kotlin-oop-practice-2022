@@ -1,7 +1,5 @@
 package coursework.controller
 
-import coursework.model.Coordinate
-import coursework.model.GAME_NOT_FINISHED
 import coursework.model.Model
 
 fun charToInt(input: Char):Int{
@@ -32,7 +30,7 @@ class Controller(private val model: Model) {
     }
 
     private fun startGame() {
-        while (model.state in GAME_NOT_FINISHED) {
+        /*while (model.state in GAME_NOT_FINISHED) {
             val input = readln().split(" ")
             val whence = Coordinate(0,0)
             val where = Coordinate(0,0)
@@ -45,6 +43,6 @@ class Controller(private val model: Model) {
             } catch (e: Exception) {
                 println(e.message)
             }
-        }
+        }*/
     }
 }

@@ -1,6 +1,7 @@
 package coursework.view
 
-import coursework.model.*
+import coursework.model.Model
+import coursework.model.ModelChangeListener
 import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Component
@@ -45,7 +46,7 @@ class ChessUI : JFrame("Chess"), ModelChangeListener {
         val restartButton = JButton("Restart")
         updateFont(restartButton, 20.0f)
         restartButton.addActionListener {
-            if (gameModel.state in GAME_NOT_FINISHED) {
+            /*if (gameModel.state in GAME_NOT_FINISHED) {
                 val dialogOption = JOptionPane.showConfirmDialog(
                     this,
                     "Game not finished, are you sure?",
@@ -58,7 +59,7 @@ class ChessUI : JFrame("Chess"), ModelChangeListener {
                 }
             } else {
                 resubscribe()
-            }
+            }*/
         }
 
         return restartButton
@@ -107,7 +108,7 @@ class ChessUI : JFrame("Chess"), ModelChangeListener {
 
         for ((i, buttonRow) in buttons.withIndex()) {
             for ((j, button) in buttonRow.withIndex()) {
-                val cell = gameModel.board[i][j]
+                val cell = gameModel.contacts[i][j]
                 button.text = cell.toString()
 
                 //button.isEnabled = cell == Cell.EMPTY && state in GAME_NOT_FINISHED

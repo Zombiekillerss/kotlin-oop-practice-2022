@@ -1,3 +1,7 @@
 package coursework.contacts.address
 
-data class Address(val postcode: String = "", val city: String = "", val street: String = "", val houseNumber: String = "")
+data class Address(var postcode: String = "", var city: String = "", var street: String = "", var houseNumber: String = "") {
+    override fun toString(): String {
+        return "$postcode $city $street $houseNumber"
+    }
+}

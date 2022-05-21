@@ -22,4 +22,23 @@ class NumbersPhone {
     fun changeNumber(index: Int, newNumber:String){
         listNumbers[index] = newNumber
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as NumbersPhone
+
+        if (listNumbers != other.listNumbers) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return listNumbers.hashCode()
+    }
+
+    override fun toString(): String {
+        return "$listNumbers"
+    }
 }

@@ -73,7 +73,7 @@ class Model {
         // check win
         val player = _board[newR][newC]
 
-        // update board
+        // update contacts
         _board[row][col] = EMPTY
         _board[newR][newC] = PLAYER
 

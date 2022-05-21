@@ -7,7 +7,7 @@ class Emails {
         return listEmails
     }
 
-    fun addNumber(email: String){
+    fun addEmail(email: String){
         listEmails.add(email)
     }
 
@@ -19,7 +19,27 @@ class Emails {
         listEmails.remove(email)
     }
 
-    fun changeNumber(index: Int, newEmail:String){
+    fun changeEmail(index: Int, newEmail:String){
         listEmails[index] = newEmail
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Emails
+
+        if (listEmails != other.listEmails) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return listEmails.hashCode()
+    }
+
+    override fun toString(): String {
+        return "$listEmails"
+    }
+
 }
