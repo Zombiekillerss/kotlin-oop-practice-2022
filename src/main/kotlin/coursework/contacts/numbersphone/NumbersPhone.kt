@@ -3,23 +3,23 @@ package coursework.contacts.numbersphone
 class NumbersPhone {
     private val listNumbers: MutableList<String> = mutableListOf()
 
-    fun getList(): List<String>{
+    fun getList(): List<String> {
         return listNumbers
     }
 
-    fun addNumber(number: String){
+    fun addNumber(number: String) {
         listNumbers.add(number)
     }
 
-    fun addAll(newListNumbers: List<String>){
+    fun addAll(newListNumbers: List<String>) {
         listNumbers.addAll(newListNumbers)
     }
 
-    fun remove(number: String){
+    fun remove(number: String) {
         listNumbers.remove(number)
     }
 
-    fun changeNumber(index: Int, newNumber:String){
+    fun changeNumber(index: Int, newNumber: String) {
         listNumbers[index] = newNumber
     }
 
@@ -39,6 +39,9 @@ class NumbersPhone {
     }
 
     override fun toString(): String {
-        return "$listNumbers"
+        var str = ""
+        for (i in listNumbers)
+            str += "$i,"
+        return str
     }
 }

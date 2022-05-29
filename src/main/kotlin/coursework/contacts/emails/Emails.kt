@@ -39,7 +39,10 @@ class Emails {
     }
 
     override fun toString(): String {
-        return "$listEmails"
+        var str = " "
+        for(i in listEmails)
+            str+= "$i,"
+        return str
     }
 
 }

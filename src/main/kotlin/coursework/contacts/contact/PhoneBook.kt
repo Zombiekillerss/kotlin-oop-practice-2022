@@ -21,8 +21,8 @@ class PhoneBook {
     private val date = DateBirth()
 
     fun getName() = name
-    fun getNumbers() = numbers.getList()
-    fun getEmails() = emails.getList()
+    fun getNumbers() = numbers
+    fun getEmails() = emails
     fun getAddresses() = address
     fun getDate() = date
 
