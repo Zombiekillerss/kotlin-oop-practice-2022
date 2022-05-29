@@ -5,9 +5,9 @@ import kotlin.math.sqrt
 
 @Serializable
 class Triangle(
-    private val lengthFirstSide: Double = 0.0,
-    private val lengthSecondSide: Double = 0.0,
-    private val lengthThirdSide: Double = 0.0,
+    val lengthFirstSide: Double = 0.0,
+    val lengthSecondSide: Double = 0.0,
+    val lengthThirdSide: Double = 0.0,
     override val borderColor: Color,
     override val fillColor: Color
 ) : ColoredShape2d {

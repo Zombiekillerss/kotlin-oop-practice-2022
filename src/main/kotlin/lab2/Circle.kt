@@ -5,7 +5,7 @@ import kotlin.math.PI
 import kotlin.math.pow
 
 @Serializable
-class Circle(private val radius: Double, override val borderColor: Color, override val fillColor: Color) :
+class Circle(val radius: Double, override val borderColor: Color, override val fillColor: Color) :
     ColoredShape2d {
     init {
         require(radius > 0) { "Radius entered incorrectly!!" }

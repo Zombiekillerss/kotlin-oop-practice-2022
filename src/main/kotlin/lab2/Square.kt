@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 import kotlin.math.pow
 
 @Serializable
-class Square(private val lengthSide: Double, override val borderColor: Color, override val fillColor: Color) :
+class Square(val lengthSide: Double, override val borderColor: Color, override val fillColor: Color) :
     ColoredShape2d {
     init {
         require(lengthSide > 0) { "Side lengths entered incorrectly!!" }

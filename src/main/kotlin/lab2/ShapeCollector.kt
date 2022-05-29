@@ -47,7 +47,7 @@ class ShapeCollector<Figure : ColoredShape2d> {
         listFigure.addAll(newListFigure)
     }
 
-    fun getSorted(newComparator: Comparator<Figure>): List<Figure> {
+    fun getSorted(newComparator: Comparator<in Figure>): List<Figure> {
         val sortList = listFigure
         sortList.sortWith(newComparator)
         return sortList
@@ -70,7 +70,7 @@ class ShapeCollector<Figure : ColoredShape2d> {
     }
 
     //I spied the code at Khoroshkova Alexandra Sergeevna (I came up with it myself)
-    fun getListDifferentFigure(): Map<Class<Any>, List<Figure>> {
+    fun getListDifferentFigure(): Map<Class<out Figure>, List<Figure>> {
         return listFigure.groupBy { it.javaClass }
     }
 }

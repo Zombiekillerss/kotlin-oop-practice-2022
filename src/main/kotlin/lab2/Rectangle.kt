@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 class Rectangle(
-    private val lengthFirstSide: Double,
-    private val lengthSecondSide: Double,
+    val lengthFirstSide: Double,
+    val lengthSecondSide: Double,
     override val borderColor: Color,
     override val fillColor: Color
 ) : ColoredShape2d {

@@ -31,13 +31,7 @@ interface ModelChangeListener {
     fun onModelChanged()
 }
 
-//private val LAB = File("src/main/kotlin/lab4/labyrinth.txt").readLines()
-//private val BOARD_SIZE_COL = LAB[0].length
-//private val BOARD_SIZE_ROW = LAB.size
-private val workWithFile = WorkWithFile()
-
-class Model {
-    private val labyrinth = workWithFile.getLabyrinth()
+class Model(private val labyrinth: MutableList<String>) {
     private val boardSizeCol = labyrinth[0].length
     private val boardSizeRow = labyrinth.size
     private val _board: MutableList<MutableList<Cell>> = initEmptyBoard()
@@ -78,7 +72,7 @@ class Model {
         _board[newR][newC] = PLAYER
 
         if (statePlayer == State.KEEP)
-            saveGame()
+            saveGame(WorkWithFile())
 
         notifyListeners()
         require(!checkWin(player)) {
@@ -89,7 +83,7 @@ class Model {
         col = newC
     }
 
-    private fun saveGame() {
+    private fun saveGame(workWithFile: WorkWithFile) {
         workWithFile.writeToFile(board)
     }
 

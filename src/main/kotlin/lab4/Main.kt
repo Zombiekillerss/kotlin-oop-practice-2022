@@ -1,5 +1,6 @@
 package lab4
 
+import lab4.workwithfile.WorkWithFile
 import lab4.controller.Controller
 import lab4.model.Model
 import lab4.view.ConsoleUi
@@ -15,7 +16,8 @@ fun main() {
                 "E-exit from the maze\n" +
                 "#-wall\n"
     )
-    val mod = Model()
+    val workWithFile = WorkWithFile()
+    val mod = Model(workWithFile.getLabyrinth().toMutableList())
     ConsoleUi(mod)
     Controller(mod)
 
