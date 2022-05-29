@@ -2,10 +2,6 @@ package coursework.model
 
 import coursework.contacts.contact.PhoneBook
 
-interface ModelChangeListener {
-    fun onModelChanged()
-}
-
 class Model {
     private val _contacts: MutableList<PhoneBook> = initEmptyBoard()
     val contacts: List<PhoneBook>
@@ -14,14 +10,8 @@ class Model {
     //var state: State = FIRST_MOVE
     //    private set
 
-    private val listeners: MutableSet<ModelChangeListener> = mutableSetOf()
-
-    fun addModelChangeListener(listener: ModelChangeListener) {
-        listeners.add(listener)
-    }
-
-    fun removeModelChangeListener(listener: ModelChangeListener) {
-        listeners.remove(listener)
+    fun addContact(contact: PhoneBook){
+        _contacts.add(contact)
     }
 
     fun addNumber(contact: PhoneBook, number: String) {
@@ -83,12 +73,23 @@ class Model {
         writer.close()
     }*/
 
-    private fun notifyListeners() {
-        listeners.forEach { it.onModelChanged() }
-    }
-
     private fun initEmptyBoard(): MutableList<PhoneBook> {
-        return mutableListOf()
+        val demoContacts = mutableListOf<PhoneBook>()
+        val but1 = PhoneBook()
+        val but2 = PhoneBook()
+        val but3 = PhoneBook()
+        but1.changeName("lol1", "kol1", "vol1")
+        but2.changeName("lol23", "kol2", "vol2")
+        but3.changeName("lol3", "kol3", "vol3")
+        but1.changeDate(9,8,22)
+        but2.changeDate(10, 11, 22)
+        but3.changeDate(11, 11, 22)
+
+        demoContacts.add(but1)
+        demoContacts.add(but2)
+        demoContacts.add(but3)
+
+        return demoContacts
     }
 
     override fun toString(): String {
@@ -97,5 +98,9 @@ class Model {
                 append(it).appendLine()
             }
         }
+    }
+
+    fun removeProfile(index: Int) {
+        _contacts.removeAt(index)
     }
 }

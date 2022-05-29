@@ -62,9 +62,9 @@ class PhoneBook {
         if (firstName != "")
             name.firstName = firstName
         if (secondName != "")
-            name.firstName = secondName
+            name.secondName = secondName
         if (lastName != "")
-            name.firstName = lastName
+            name.lastName = lastName
     }
 
     fun changeAddress(city: String, houseNumber: String, postcode: String, street: String) {
