@@ -81,9 +81,9 @@ class Model {
         but1.changeName("lol1", "kol1", "vol1")
         but2.changeName("lol23", "kol2", "vol2")
         but3.changeName("lol3", "kol3", "vol3")
-        but1.changeDate(9,8,22)
-        but2.changeDate(10, 11, 22)
-        but3.changeDate(11, 11, 22)
+        but1.changeDate(9,8,2002)
+        but2.changeDate(10, 11, 2002)
+        but3.changeDate(11, 11, 2002)
 
         demoContacts.add(but1)
         demoContacts.add(but2)
@@ -102,5 +102,9 @@ class Model {
 
     fun removeProfile(index: Int) {
         _contacts.removeAt(index)
+    }
+
+    fun changeContact(index: Int,contact: PhoneBook) {
+        _contacts[index] = contact
     }
 }

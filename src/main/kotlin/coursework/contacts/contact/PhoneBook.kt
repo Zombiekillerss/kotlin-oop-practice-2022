@@ -67,7 +67,7 @@ class PhoneBook {
             name.lastName = lastName
     }
 
-    fun changeAddress(city: String, houseNumber: String, postcode: String, street: String) {
+    fun changeAddress(postcode: String, city: String, street: String, houseNumber: String) {
         address.city = city
         address.houseNumber = houseNumber
         address.postcode = postcode
@@ -102,6 +102,14 @@ class PhoneBook {
         result = 31 * result + address.hashCode()
         result = 31 * result + date.hashCode()
         return result
+    }
+
+    fun removeAllEmails() {
+        emails.clear()
+    }
+
+    fun removeAllNumbers() {
+        numbers.clear()
     }
 
 

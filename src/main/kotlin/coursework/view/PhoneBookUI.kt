@@ -1,9 +1,12 @@
 package coursework.view
 
+import coursework.contacts.contact.PhoneBook
 import coursework.model.Model
+import coursework.savereadfile.WorkWithFile
 import coursework.state.State
 import java.awt.BorderLayout
 import java.awt.Component
+import java.awt.Container
 import javax.swing.*
 
 private const val GAP = 10
@@ -12,29 +15,24 @@ private var stateDelete = State.DELETE_PROFILE
 class PhoneBookUI : JFrame("Phone book") {
     private var dataModel: Model = Model()
     private val statusLabel = JLabel("Phone book", JLabel.CENTER)
-    private val buttons = mutableListOf<JRadioButton>()
-    private val radioGroup = ButtonGroup()
-    private var scrollPanel: JPanel = createProfilePanel()
-    private val menuPanel = createScroll()
+    private val listChoice = DefaultListModel<String>()
+    private var buttons = JList(listChoice)
+    private var menuPanel = createScroll()
     private val listText = mutableListOf<JTextField>()
 
     init {
+        updateFont(statusLabel, 23.0f)
+        buttons.selectionMode = ListSelectionModel.SINGLE_SELECTION
+        buttons.prototypeCellValue = "Кононов Александр Александрович"
         setSize(900, 700)
         defaultCloseOperation = EXIT_ON_CLOSE
-
-        rootPane.contentPane = JPanel(BorderLayout(GAP, GAP)).apply {
-            add(createMenuPanel())
-            /*add(statusLabel, BorderLayout.NORTH)
-            add(mainPanel, BorderLayout.CENTER)
-            add(createButtonsTransformation(), BorderLayout.SOUTH)*/
-            border = BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP)
-        }
+        rootPane.contentPane = createMenuPanel() as Container?
     }
 
-    private fun createMenuPanel(): Component{
+    private fun createMenuPanel(): Component {
         val panel = JPanel(BorderLayout(GAP, GAP)).apply {
             add(statusLabel, BorderLayout.NORTH)
-            add(menuPanel, BorderLayout.CENTER)
+            add(menuPanel, BorderLayout.WEST)
             add(createButtonsTransformation(), BorderLayout.SOUTH)
             border = BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP)
         }
@@ -43,29 +41,40 @@ class PhoneBookUI : JFrame("Phone book") {
 
     private fun createButtonsTransformation(): Component {
         val panel = JPanel().apply {
-            add(JButton("Создать"))
+            add(createCreateButton())
             add(createRefactorButton())
             add(createDeleteButton())
-            add(JButton("Сохранить"))
+            add(createSaveButton())
         }
         return panel
     }
 
     private fun createRefactorButton(): JButton {
         val refactorButton = JButton("Редактировать")
+        updateFont(refactorButton, 20.0f)
         refactorButton.addActionListener {
-            if(buttons.filter { it.isSelected } != listOf<JRadioButton>()){
-                rootPane.contentPane.remove(0)
-                rootPane.contentPane = JPanel(BorderLayout(GAP, GAP)).apply {
-                    add(createRefactorMenu())
-                    border = BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP)
-                }
+            if (buttons.selectedIndex != -1) {
+                rootPane.contentPane.add(createCreateRefactorPanel(true), BorderLayout.CENTER)
+                rootPane.contentPane.remove(2)
+                rootPane.contentPane.add(createButtonsRefactor(true, buttons.selectedIndex), BorderLayout.SOUTH)
                 rootPane.repaint()
                 rootPane.revalidate()
-
             }
         }
         return refactorButton
+    }
+
+    private fun createCreateButton(): JButton {
+        val createButton = JButton("Создать")
+        updateFont(createButton, 20.0f)
+        createButton.addActionListener {
+            rootPane.contentPane.add(createCreateRefactorPanel(false), BorderLayout.CENTER)
+            rootPane.contentPane.remove(2)
+            rootPane.contentPane.add(createButtonsRefactor(false, buttons.selectedIndex), BorderLayout.SOUTH)
+            rootPane.repaint()
+            rootPane.revalidate()
+        }
+        return createButton
     }
 
     private fun createDeleteButton(): Component {
@@ -75,11 +84,10 @@ class PhoneBookUI : JFrame("Phone book") {
             val index: Int
             when (stateDelete) {
                 State.DELETE_PROFILE -> {
-                    if (buttons.filter { it.isSelected } != listOf<JRadioButton>())
-                        if (buttons.indexOf(buttons.filter { it.isSelected }[0]) >= 0) {
-                            index = buttons.indexOf(buttons.filter { it.isSelected }[0])
-                            deleteProfile(index)
-                        }
+                    if (buttons.selectedIndex != -1) {
+                        index = buttons.selectedIndex
+                        deleteProfile(index)
+                    }
                 }
                 else ->
                     TODO()
@@ -89,40 +97,16 @@ class PhoneBookUI : JFrame("Phone book") {
         return removeButton
     }
 
-
     private fun createScroll(): JScrollPane {
-        return JScrollPane(scrollPanel)
+        for (contact in dataModel.contacts)
+            listChoice.add(listChoice.size(), contact.getName().toString())
+        buttons = JList(listChoice)
+        return JScrollPane(buttons)
     }
 
-    private fun createProfilePanel(): JPanel {
-        var radioButton: JRadioButton
-        for (contact in dataModel.contacts) {
-            radioButton = JRadioButton((contact.getName().toString()))
-            buttons.add(radioButton)
-            radioGroup.add(radioButton)
-        }
-
-        val gamePanel = JPanel().apply {
-            for (i in buttons)
-                add(i)
-        }
-        gamePanel.layout = BoxLayout(gamePanel, BoxLayout.PAGE_AXIS)
-        scrollPanel = gamePanel
-        return gamePanel
-    }
-
-    private fun createRefactorMenu(): Component{
-        val menu = JPanel(BorderLayout(GAP, GAP)).apply{
-            add(statusLabel, BorderLayout.NORTH)
-            add(createCreateRefactorPanel(), BorderLayout.CENTER)
-            add(createButtonsRefactor(true), BorderLayout.SOUTH)
-            border = BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP)
-        }
-        return menu
-    }
-
-    private fun createCreateRefactorPanel(): Component {
-        val contact = dataModel.contacts[buttons.indexOf(buttons.filter{it.isSelected}[0])]
+    private fun createCreateRefactorPanel(isRefactor: Boolean): Component {
+        val contact = if (isRefactor) dataModel.contacts[buttons.selectedIndex]
+        else PhoneBook()
         listText.add(JTextField(contact.getName().firstName))
         listText.add(JTextField(contact.getName().secondName))
         listText.add(JTextField(contact.getName().lastName))
@@ -135,7 +119,7 @@ class PhoneBookUI : JFrame("Phone book") {
         listText.add(JTextField(contact.getAddresses().houseNumber))
         listText.add(JTextField(contact.getEmails().toString()))
         listText.add(JTextField(contact.getNumbers().toString()))
-        val panel = JPanel().apply{
+        val panel = JPanel().apply {
             add(JLabel("Имя"))
             add(listText[0])
             add(JLabel("Фамилия"))
@@ -167,51 +151,115 @@ class PhoneBookUI : JFrame("Phone book") {
         return panel
     }
 
-    private fun createButtonsRefactor(isRefactor: Boolean): Component{
+    private fun createButtonsRefactor(isRefactor: Boolean, index: Int): Component {
         val panel = JPanel().apply {
-            add(createRefactorSaveButton(isRefactor))
+            add(createRefactorSaveButton(isRefactor, index))
             add(createButtonBack())
         }
         return panel
     }
 
     private fun deleteProfile(index: Int) {
-        radioGroup.remove(buttons[index])
         dataModel.removeProfile(index)
-        scrollPanel.remove(buttons[index])
-        buttons.removeAt(index)
+        listChoice.remove(index)
         menuPanel.repaint()
         menuPanel.revalidate()
     }
 
-    private fun createRefactorSaveButton(isRefactor: Boolean): JButton {
+    private fun createRefactorSaveButton(isRefactor: Boolean, index: Int): JButton {
         val but = JButton()
-        if(isRefactor){
+        if (isRefactor) {
             but.text = "Редактировать"
-        }
-        else {
+            but.addActionListener {
+                refactorContact(index)
+            }
+        } else {
             but.text = "Создать"
+            but.addActionListener {
+                createContact()
+            }
         }
+        updateFont(but, 20.0f)
         return but
     }
+
+    private fun createContact() {
+        refactorCreateContact(false)
+        listChoice.add(listChoice.size(), dataModel.contacts[dataModel.contacts.size - 1].getName().toString())
+    }
+
+    private fun refactorContact(index: Int) {
+        refactorCreateContact(true, index)
+        listChoice[index] = dataModel.contacts[index].getName().toString()
+    }
+
+    private fun refactorCreateContact(isRefactor: Boolean, index: Int = buttons.selectedIndex) {
+        if (listText[0].text == "" || listText[1].text == "" || listText[2].text == "") {
+            JOptionPane.showConfirmDialog(
+                this,
+                "Имя, фамилия и отчество не должны быть пустыми!!",
+                "Неверный ввод",
+                JOptionPane.OK_OPTION
+            )
+        } else {
+            val contact = PhoneBook()
+            contact.changeName(listText[0].text, listText[1].text, listText[2].text)
+            contact.changeDate(listText[3].text.toInt(), listText[4].text.toInt(), listText[5].text.toInt())
+            contact.changeAddress(listText[6].text, listText[7].text, listText[8].text, listText[9].text)
+            val emails = listText[10].text.split(",").toMutableList()
+            if (emails.last() == "")
+                emails.removeAt(emails.lastIndex)
+            if (isRefactor)
+                dataModel.contacts[index].removeAllEmails()
+            contact.addEmails(emails)
+            val numbers = listText[11].text.split(",").toMutableList()
+            if (numbers.last() == "")
+                numbers.removeAt(numbers.lastIndex)
+            if (isRefactor)
+                dataModel.contacts[index].removeAllNumbers()
+            contact.addNumbers(numbers)
+            if (isRefactor)
+                dataModel.changeContact(index, contact)
+            else
+                dataModel.addContact(contact)
+            back()
+        }
+    }
+
 
     private fun createButtonBack(): JButton {
         val but = JButton("Назад")
         but.addActionListener {
-            rootPane.contentPane.remove(0)
-            rootPane.contentPane = JPanel(BorderLayout(GAP, GAP)).apply {
-                add(createMenuPanel())
-                border = BorderFactory.createEmptyBorder(GAP, GAP, GAP, GAP)
-            }
-            rootPane.repaint()
-            rootPane.revalidate()
+            back()
         }
+        updateFont(but, 20.0f)
         return but
+    }
+
+    private fun back() {
+        listText.clear()
+        rootPane.contentPane = createMenuPanel() as Container?
+        rootPane.repaint()
+        rootPane.revalidate()
     }
 
     private fun updateFont(component: JComponent, newFontSize: Float) {
         val font = component.font
         val derivedFont = font.deriveFont(newFontSize)
         component.font = derivedFont
+    }
+
+    private fun createSaveButton(): JButton {
+        val saveButton = JButton("Сохранить")
+        updateFont(saveButton, 20.0f)
+        saveButton.addActionListener {
+            save()
+        }
+        return saveButton
+    }
+
+    private fun save(){
+        val file = WorkWithFile()
+        file.writeToFile(dataModel.contacts)
     }
 }

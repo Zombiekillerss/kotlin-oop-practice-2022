@@ -40,8 +40,15 @@ class NumbersPhone {
 
     override fun toString(): String {
         var str = ""
-        for (i in listNumbers)
-            str += "$i,"
+        for(i in listNumbers.indices) {
+            str += listNumbers[i]
+            if(i != listNumbers.size - 1)
+                str+=","
+        }
         return str
+    }
+
+    fun clear() {
+        listNumbers.clear()
     }
 }

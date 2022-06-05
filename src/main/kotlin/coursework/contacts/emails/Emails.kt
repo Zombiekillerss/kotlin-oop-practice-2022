@@ -39,10 +39,18 @@ class Emails {
     }
 
     override fun toString(): String {
-        var str = " "
-        for(i in listEmails)
-            str+= "$i,"
+        var str = ""
+        for(i in listEmails.indices) {
+            str += listEmails[i]
+            if(i != listEmails.size - 1)
+                str+=","
+        }
+
         return str
+    }
+
+    fun clear() {
+        listEmails.clear()
     }
 
 }
