@@ -10,8 +10,8 @@ import javax.swing.*
 
 private const val GAP = 10
 
-class PhoneBookUI : JFrame("Phone book") {
-    private var dataModel: Model = Model()
+class PhoneBookUI(listContacts: List<PhoneBook> = listOf()) : JFrame("Phone book") {
+    private var dataModel: Model = Model(listContacts)
     private val statusLabel = JLabel("Phone book", JLabel.CENTER)
     private val listChoice = DefaultListModel<String>()
     private var buttons = JList(listChoice)
