@@ -7,20 +7,8 @@ class NumbersPhone {
         return listNumbers
     }
 
-    fun addNumber(number: String) {
-        listNumbers.add(number)
-    }
-
     fun addAll(newListNumbers: List<String>) {
         listNumbers.addAll(newListNumbers)
-    }
-
-    fun remove(number: String) {
-        listNumbers.remove(number)
-    }
-
-    fun changeNumber(index: Int, newNumber: String) {
-        listNumbers[index] = newNumber
     }
 
     override fun equals(other: Any?): Boolean {
@@ -40,10 +28,10 @@ class NumbersPhone {
 
     override fun toString(): String {
         var str = ""
-        for(i in listNumbers.indices) {
+        for (i in listNumbers.indices) {
             str += listNumbers[i]
-            if(i != listNumbers.size - 1)
-                str+=","
+            if (i != listNumbers.size - 1)
+                str += ","
         }
         return str
     }

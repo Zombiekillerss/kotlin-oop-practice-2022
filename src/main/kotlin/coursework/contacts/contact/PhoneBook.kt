@@ -26,36 +26,13 @@ class PhoneBook {
     fun getAddresses() = address
     fun getDate() = date
 
-    fun addNumber(number: String) {
-        numbers.addNumber(number)
-    }
-
     fun addNumbers(numberList: List<String>) {
         numbers.addAll(numberList)
     }
 
-    fun removeNumber(number: String) {
-        numbers.remove(number)
-    }
-
-    fun changeNumber(index: Int, newNumber: String) {
-        numbers.changeNumber(index, newNumber)
-    }
-
-    fun addEmail(email: String) {
-        emails.addEmail(email)
-    }
 
     fun addEmails(emailList: List<String>) {
         emails.addAll(emailList)
-    }
-
-    fun removeEmail(email: String) {
-        emails.remove(email)
-    }
-
-    fun changeEmail(index: Int, newEmail: String) {
-        emails.changeEmail(index, newEmail)
     }
 
     fun changeName(firstName: String, secondName: String, lastName: String) {

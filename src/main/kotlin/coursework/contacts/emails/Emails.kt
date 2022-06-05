@@ -3,24 +3,12 @@ package coursework.contacts.emails
 class Emails {
     private val listEmails = mutableListOf<String>()
 
-    fun getList(): List<String>{
+    fun getList(): List<String> {
         return listEmails
     }
 
-    fun addEmail(email: String){
-        listEmails.add(email)
-    }
-
-    fun addAll(newListEmails: List<String>){
+    fun addAll(newListEmails: List<String>) {
         listEmails.addAll(newListEmails)
-    }
-
-    fun remove(email: String){
-        listEmails.remove(email)
-    }
-
-    fun changeEmail(index: Int, newEmail:String){
-        listEmails[index] = newEmail
     }
 
     override fun equals(other: Any?): Boolean {
@@ -40,10 +28,10 @@ class Emails {
 
     override fun toString(): String {
         var str = ""
-        for(i in listEmails.indices) {
+        for (i in listEmails.indices) {
             str += listEmails[i]
-            if(i != listEmails.size - 1)
-                str+=","
+            if (i != listEmails.size - 1)
+                str += ","
         }
 
         return str

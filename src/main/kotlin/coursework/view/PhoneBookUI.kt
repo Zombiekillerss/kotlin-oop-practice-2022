@@ -3,14 +3,12 @@ package coursework.view
 import coursework.contacts.contact.PhoneBook
 import coursework.model.Model
 import coursework.savereadfile.WorkWithFile
-import coursework.state.State
 import java.awt.BorderLayout
 import java.awt.Component
 import java.awt.Container
 import javax.swing.*
 
 private const val GAP = 10
-private var stateDelete = State.DELETE_PROFILE
 
 class PhoneBookUI : JFrame("Phone book") {
     private var dataModel: Model = Model()
@@ -81,16 +79,9 @@ class PhoneBookUI : JFrame("Phone book") {
         val removeButton = JButton("Удалить")
         updateFont(removeButton, 20.0f)
         removeButton.addActionListener {
-            val index: Int
-            when (stateDelete) {
-                State.DELETE_PROFILE -> {
-                    if (buttons.selectedIndex != -1) {
-                        index = buttons.selectedIndex
-                        deleteProfile(index)
-                    }
-                }
-                else ->
-                    TODO()
+            if (buttons.selectedIndex != -1) {
+                val index = buttons.selectedIndex
+                deleteProfile(index)
             }
         }
 
@@ -258,7 +249,7 @@ class PhoneBookUI : JFrame("Phone book") {
         return saveButton
     }
 
-    private fun save(){
+    private fun save() {
         val file = WorkWithFile()
         file.writeToFile(dataModel.contacts)
     }
