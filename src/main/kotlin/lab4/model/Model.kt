@@ -1,7 +1,6 @@
 package lab4.model
 
 import lab4.model.Cell.*
-import lab4.workwithfile.WorkWithFile
 
 enum class Cell(private val textValue: String) {
     PLAYER("P"),
@@ -19,8 +18,7 @@ enum class State {
     DOWN_MOVE,
     STAY,
     WIN,
-    EXIT,
-    KEEP
+    EXIT
 }
 
 val GAME_NOT_FINISHED = setOf(State.LEFT_MOVE, State.RIGHT_MOVE, State.DOWN_MOVE, State.UP_MOVE, State.STAY)
@@ -37,7 +35,7 @@ class Model(private val labyrinth: MutableList<String>) {
     private val _board: MutableList<MutableList<Cell>> = initEmptyBoard()
     private var row = 0
     private var col = 0
-    private val board: List<List<Cell>>
+    val board: List<List<Cell>>
         get() = _board
 
     var state: State = FIRST_MOVE
@@ -71,9 +69,6 @@ class Model(private val labyrinth: MutableList<String>) {
         _board[row][col] = EMPTY
         _board[newR][newC] = PLAYER
 
-        if (statePlayer == State.KEEP)
-            saveGame(WorkWithFile())
-
         notifyListeners()
         require(!checkWin(player)) {
             state = State.WIN
@@ -81,10 +76,6 @@ class Model(private val labyrinth: MutableList<String>) {
         }
         row = newR
         col = newC
-    }
-
-    private fun saveGame(workWithFile: WorkWithFile) {
-        workWithFile.writeToFile(board)
     }
 
     private fun notifyListeners() {

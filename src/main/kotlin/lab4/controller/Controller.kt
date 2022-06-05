@@ -3,6 +3,7 @@ package lab4.controller
 import lab4.model.GAME_NOT_FINISHED
 import lab4.model.Model
 import lab4.model.State
+import lab4.workwithfile.WorkWithFile
 
 
 class Controller(private val model: Model) {
@@ -21,7 +22,7 @@ class Controller(private val model: Model) {
                     's' -> state = State.DOWN_MOVE
                     'd' -> state = State.RIGHT_MOVE
                     'e' -> state = State.EXIT
-                    'k' -> state = State.KEEP
+                    'k' -> saveGame()
                 }
                 try {
                     model.doMove(state)
@@ -33,4 +34,6 @@ class Controller(private val model: Model) {
                 break
         }
     }
+
+    private fun saveGame() = WorkWithFile().writeToFile(model.board)
 }

@@ -1,8 +1,5 @@
 package lab2
 
-import kotlinx.serialization.Serializable
-
-@Serializable
 class ShapeCollector<Figure : ColoredShape2d> {
     private var listFigure: MutableList<Figure> = mutableListOf()
     private var maxS: Figure? = null

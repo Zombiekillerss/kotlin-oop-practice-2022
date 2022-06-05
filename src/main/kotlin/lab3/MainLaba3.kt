@@ -7,4 +7,5 @@ fun main() {
     service.addContact(person, Phone("90", PhoneType.MOBILE))
     person = Person("Alexandr", "Tikhonov")
     service.addContact(person, Phone("90", PhoneType.WORK))
+    println(service.getAllPersons())
 }
