@@ -2,79 +2,18 @@ package coursework.model
 
 import coursework.contacts.contact.PhoneBook
 
-class Model {
-    private val _contacts: MutableList<PhoneBook> = initEmptyBoard()
+class Model(listContact: List<PhoneBook> = listOf()) {
+    private val _contacts: MutableList<PhoneBook> = initEmptyBoard(listContact)
     val contacts: List<PhoneBook>
         get() = _contacts
-
-    //var state: State = FIRST_MOVE
-    //    private set
 
     fun addContact(contact: PhoneBook){
         _contacts.add(contact)
     }
 
-    fun addNumber(contact: PhoneBook, number: String) {
-        contact.addNumber(number)
-    }
-
-    fun addNumbers(contact: PhoneBook, numberList: List<String>) {
-        contact.addNumbers(numberList)
-    }
-
-    fun removeNumber(contact: PhoneBook, number: String) {
-        contact.removeNumber(number)
-    }
-
-    fun changeNumber(contact: PhoneBook, index: Int, newNumber: String) {
-        contact.changeNumber(index, newNumber)
-    }
-
-    fun addEmail(contact: PhoneBook, email: String) {
-        contact.addEmail(email)
-    }
-
-    fun addEmails(contact: PhoneBook, emailList: List<String>) {
-        contact.addEmails(emailList)
-    }
-
-    fun removeEmail(contact: PhoneBook, email: String) {
-        contact.removeEmail(email)
-    }
-
-    fun changeEmail(contact: PhoneBook, index: Int, newEmail: String) {
-        contact.changeEmail(index, newEmail)
-    }
-
-    fun changeName(contact: PhoneBook, firstName: String, secondName: String, lastName: String) {
-        contact.changeName(firstName,secondName,lastName)
-    }
-
-    fun changeAddress(contact: PhoneBook, city: String, houseNumber: String, postcode: String, street: String) {
-        contact.changeAddress(city,houseNumber,postcode, street)
-    }
-
-    fun changeDate(contact: PhoneBook, day: Int, month: Int, year: Int) {
-        contact.changeDate(day,month,year)
-    }
-
-    fun doMove() {
-    }
-
-    /*private fun saveGame() {
-        val writer = File("src/main/kotlin/lab4/labyrinth.txt").bufferedWriter()
-        for (i in contacts) {
-            for (j in i) {
-                writer.write(j.toString())
-                writer.write(" ")
-            }
-            writer.newLine()
-        }
-        writer.close()
-    }*/
-
-    private fun initEmptyBoard(): MutableList<PhoneBook> {
-        val demoContacts = mutableListOf<PhoneBook>()
+    private fun initEmptyBoard(listContact: List<PhoneBook>): MutableList<PhoneBook> {
+        val listContacts = mutableListOf<PhoneBook>()
+        listContacts.addAll(listContact)
         val but1 = PhoneBook()
         val but2 = PhoneBook()
         val but3 = PhoneBook()
@@ -85,11 +24,11 @@ class Model {
         but2.changeDate(10, 11, 2002)
         but3.changeDate(11, 11, 2002)
 
-        demoContacts.add(but1)
-        demoContacts.add(but2)
-        demoContacts.add(but3)
+        listContacts.add(but1)
+        listContacts.add(but2)
+        listContacts.add(but3)
 
-        return demoContacts
+        return listContacts
     }
 
     override fun toString(): String {
