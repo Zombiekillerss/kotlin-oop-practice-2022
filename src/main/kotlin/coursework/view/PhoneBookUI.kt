@@ -6,6 +6,7 @@ import coursework.savereadfile.WorkWithFile
 import java.awt.BorderLayout
 import java.awt.Component
 import java.awt.Container
+import java.awt.Dimension
 import javax.swing.*
 
 private const val GAP = 10
@@ -20,9 +21,10 @@ class PhoneBookUI(listContacts: List<PhoneBook> = listOf()) : JFrame("Phone book
 
     init {
         updateFont(statusLabel, 23.0f)
+
         buttons.selectionMode = ListSelectionModel.SINGLE_SELECTION
         buttons.prototypeCellValue = "Кононов Александр Александрович"
-        setSize(900, 700)
+        minimumSize = Dimension(1200, 900)
         defaultCloseOperation = EXIT_ON_CLOSE
         rootPane.contentPane = createMenuPanel() as Container?
     }
@@ -139,7 +141,7 @@ class PhoneBookUI(listContacts: List<PhoneBook> = listOf()) : JFrame("Phone book
             add(listText[11])
         }
         panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
-        return panel
+        return JScrollPane(panel)
     }
 
     private fun createButtonsRefactor(isRefactor: Boolean, index: Int): Component {
@@ -216,7 +218,6 @@ class PhoneBookUI(listContacts: List<PhoneBook> = listOf()) : JFrame("Phone book
             back()
         }
     }
-
 
     private fun createButtonBack(): JButton {
         val but = JButton("Назад")

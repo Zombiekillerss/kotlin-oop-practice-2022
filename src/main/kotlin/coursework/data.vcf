@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:2.1
+N:familia;name;otches;;
+FN:name otches familia
+ADR;TYPE=home:;;housenumber,street;city;;postcode;
+TEL;HOME:+7989898
+TEL;HOME:89898
+EMAIL;HOME:email1
+EMAIL;HOME:email2
+END:VCARD
